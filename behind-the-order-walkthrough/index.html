@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/CustomEase.min.js"></script>
+    <style>
+      @font-face { font-family: "Afacad"; src: url("assets/fonts/afacad-latin-var.woff2") format("woff2"); font-weight: 400 700; }
+      @font-face { font-family: "Manrope"; src: url("assets/fonts/manrope-latin-var.woff2") format("woff2"); font-weight: 400 800; }
+
+      :root {
+        --ink: #0A2437; --mid: #4C5C6B; --accent: #005FB8; --navy: #09314F;
+        --amber: #EE9B01; --brown: #472E00;
+        --w-ink: rgba(0, 0, 0, 0.896); --w-sec: rgba(0, 0, 0, 0.606); --w-ter: rgba(0, 0, 0, 0.45);
+        --w-stroke: rgba(0, 0, 0, 0.0578); --w-base: #F3F3F3; --w-layer: #FFFFFF; --w-subtle: rgba(0, 0, 0, 0.0373);
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #FDF7EC; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Manrope", sans-serif; color: var(--ink); }
+
+      /* ---------- Ground: off-white + four drifting blooms (house style) ---------- */
+      #bg { position: absolute; inset: 0; background: linear-gradient(180deg, #FFFDF8 0%, #FDF7EC 100%); overflow: hidden; }
+      .bloom { position: absolute; width: 1100px; height: 1100px; border-radius: 50%; filter: blur(40px); }
+      #bl-blue { left: -420px; top: -560px; background: radial-gradient(circle, rgba(0, 95, 184, 0.15), transparent 62%); }
+      #bl-cream { left: 1240px; top: -520px; background: radial-gradient(circle, rgba(252, 235, 204, 0.95), transparent 64%); }
+      #bl-amber { left: -360px; top: 600px; background: radial-gradient(circle, rgba(238, 155, 1, 0.14), transparent 62%); }
+      #bl-mint { left: 1240px; top: 580px; background: radial-gradient(circle, rgba(39, 200, 138, 0.11), transparent 62%); }
+
+      #film { position: absolute; inset: 0; }
+      #drift { position: absolute; inset: 0; }
+      #cam { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+      .abs { position: absolute; }
+      .ic { display: block; width: 20px; height: 20px; fill: currentColor; flex: none; }
+
+      /* ---------- Film type ---------- */
+      .disp { font-family: "Afacad", sans-serif; font-weight: 650; letter-spacing: -0.03em; line-height: 1; }
+      .headline { position: absolute; display: flex; justify-content: center; flex-wrap: nowrap; gap: 0 0.26em; font-family: "Afacad", sans-serif; font-weight: 650; font-size: 88px; letter-spacing: -0.03em; color: var(--mid); line-height: 1.05; white-space: nowrap; }
+      .w { display: inline-block; }
+      .w.em { color: var(--accent); }
+      .w.k { color: var(--ink); }
+      .order { display: inline-block; background: var(--amber); color: var(--brown); padding: 0 26px 10px; border-radius: 20px; }
+      #scrim { position: absolute; left: 0; right: 0; top: 0; height: 360px; background: linear-gradient(180deg, rgba(253, 251, 247, 0.94) 0%, rgba(253, 251, 247, 0.80) 45%, rgba(253, 251, 247, 0) 100%); }
+
+      /* ---------- The Windows 11 desktop (authored in effective px, shown at 150%) ---------- */
+      #desk { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; background: #EAF2FB; box-shadow: 0 40px 120px rgba(9, 49, 79, 0.18); }
+      #deskIn { position: absolute; left: 0; top: 0; width: 1280px; height: 720px; transform: scale(1.5); transform-origin: 0 0; }
+      #wall { position: absolute; inset: 0; width: 1280px; height: 720px; display: block; object-fit: cover; }
+
+      .dicons { position: absolute; left: 6px; top: 8px; display: grid; gap: 10px; }
+      .dicon { position: relative; width: 78px; padding: 6px 4px 6px; display: grid; justify-items: center; gap: 6px; border-radius: 4px; }
+      .dicon .tile { width: 42px; height: 42px; display: grid; place-items: center; }
+      .dicon span { font-family: "Manrope", sans-serif; font-size: 12px; line-height: 15px; font-weight: 600; text-align: center; color: #10233A; }
+      #iconSel { position: absolute; inset: 0; border-radius: 4px; background: rgba(0, 95, 184, 0.16); border: 1px solid rgba(0, 95, 184, 0.35); }
+      .apptile { border-radius: 9px; background: var(--accent); color: #fff; box-shadow: 0 2px 6px rgba(0, 40, 90, 0.25); }
+
+      #taskbar { position: absolute; left: 0; right: 0; bottom: 0; height: 48px; background: rgba(243, 243, 243, 0.86); border-top: 1px solid rgba(0, 0, 0, 0.08); }
+      .tb-mid { position: absolute; left: 0; right: 0; top: 4px; display: flex; justify-content: center; gap: 4px; }
+      .tbi { position: relative; width: 40px; height: 40px; border-radius: 4px; display: grid; place-items: center; color: var(--w-ink); }
+      .tbi .ic { width: 24px; height: 24px; }
+      #tbApp { width: 24px; height: 24px; border-radius: 6px; background: var(--accent); color: #fff; display: grid; place-items: center; }
+      #tbApp .ic { width: 16px; height: 16px; }
+      #ind { position: absolute; left: 50%; bottom: 2px; width: 16px; height: 3px; margin-left: -8px; border-radius: 2px; background: var(--accent); }
+      .tray { position: absolute; right: 12px; top: 0; height: 48px; display: flex; align-items: center; gap: 14px; color: var(--w-ink); }
+      .tray .ic { width: 16px; height: 16px; }
+      .clock { display: grid; justify-items: end; font-size: 12px; line-height: 16px; font-weight: 500; }
+
+      /* ---------- The app window: Windows 11 chrome, DHIS2-style structure ---------- */
+      #win { position: absolute; left: 24px; top: 12px; width: 1232px; height: 648px; border-radius: 8px; background: var(--w-base); overflow: hidden; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.10), 0 24px 64px rgba(0, 0, 0, 0.20), 0 2px 8px rgba(0, 0, 0, 0.08); color: var(--w-ink); font-family: "Manrope", sans-serif; }
+      .tbar { position: absolute; left: 0; right: 0; top: 0; height: 32px; display: flex; align-items: center; }
+      .ticon { margin-left: 16px; width: 16px; height: 16px; border-radius: 4px; background: var(--accent); color: #fff; display: grid; place-items: center; }
+      .ticon .ic { width: 12px; height: 12px; }
+      .ttl { margin-left: 16px; font-size: 12px; font-weight: 500; }
+      .caps { margin-left: auto; display: flex; }
+      .cap { width: 46px; height: 32px; display: grid; place-items: center; }
+      .cap .ic { width: 12px; height: 12px; }
+
+      .hdr { position: absolute; left: 0; right: 0; top: 32px; height: 48px; display: flex; align-items: center; padding: 0 16px; gap: 28px; }
+      .brand { display: flex; align-items: center; gap: 10px; font-family: "Afacad", sans-serif; font-weight: 600; font-size: 17px; letter-spacing: -0.01em; }
+      .brand .ic { color: var(--accent); }
+      .tabs { display: flex; gap: 6px; height: 48px; }
+      .tab { position: relative; display: flex; align-items: center; gap: 6px; padding: 0 12px; font-size: 14px; font-weight: 500; color: var(--w-sec); }
+      .tab.on { color: var(--w-ink); font-weight: 700; }
+      .tab.on::after { content: ""; position: absolute; left: 50%; bottom: 6px; width: 16px; height: 3px; margin-left: -8px; border-radius: 2px; background: var(--accent); }
+      .tab .ic { width: 14px; height: 14px; }
+      .hdr-r { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+      .btn { height: 32px; display: inline-flex; align-items: center; gap: 8px; padding: 0 12px; border-radius: 4px; background: rgba(255, 255, 255, 0.7); border: 1px solid var(--w-stroke); border-bottom-color: rgba(0, 0, 0, 0.1622); font-size: 14px; font-weight: 600; color: var(--w-ink); white-space: nowrap; }
+      .btn .ic { width: 16px; height: 16px; }
+      .ibtn { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 4px; color: var(--w-sec); }
+      .btn.accent { background: var(--accent); border-color: rgba(0, 0, 0, 0.08); color: #fff; }
+
+      .body { position: absolute; left: 0; right: 0; top: 80px; bottom: 48px; background: var(--w-layer); border-top: 1px solid var(--w-stroke); }
+      .lp { position: absolute; left: 0; top: 0; bottom: 0; width: 372px; border-right: 1px solid var(--w-stroke); padding: 18px 18px 0; }
+      .rp { position: absolute; left: 372px; right: 0; top: 0; bottom: 0; padding: 18px 32px 0; }
+      .h-app { font-family: "Afacad", sans-serif; font-weight: 600; letter-spacing: -0.01em; color: var(--w-ink); }
+      .sub { font-size: 12px; color: var(--w-sec); }
+      .tbox { height: 32px; margin-top: 12px; display: flex; align-items: center; gap: 8px; padding: 0 10px; border-radius: 4px; background: #fff; border: 1px solid var(--w-stroke); border-bottom-color: rgba(0, 0, 0, 0.45); font-size: 14px; color: var(--w-sec); }
+      .tbox .ic { width: 16px; height: 16px; }
+      .th { margin-top: 12px; height: 28px; display: grid; grid-template-columns: 20px 1fr auto; gap: 8px; align-items: center; padding: 0 8px; font-size: 12px; font-weight: 700; color: var(--w-sec); border-bottom: 1px solid var(--w-stroke); }
+      .th span:last-child { display: flex; align-items: center; gap: 4px; }
+      .th .ic { width: 14px; height: 14px; }
+      .rows { display: grid; gap: 2px; margin-top: 4px; }
+      .row { position: relative; height: 32px; display: grid; grid-template-columns: 20px 1fr auto; gap: 8px; align-items: center; padding: 0 8px; border-radius: 4px; font-size: 14px; font-weight: 500; color: var(--w-ink); }
+      .row .ic { width: 16px; height: 16px; color: var(--w-ter); }
+      .row b { font-weight: 600; font-variant-numeric: tabular-nums; }
+      .row .na { color: var(--w-sec); }
+      .row i { position: absolute; left: 0; top: 8px; width: 3px; height: 16px; border-radius: 2px; background: var(--accent); }
+      #rowTbg { position: absolute; inset: 0; border-radius: 4px; background: rgba(0, 95, 184, 0.09); }
+
+      .empty { position: absolute; left: 0; right: 0; top: 150px; display: grid; justify-items: center; gap: 10px; font-size: 14px; color: var(--w-sec); }
+      .empty .ic { width: 32px; height: 32px; color: var(--w-ter); }
+      .crumb { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--w-sec); }
+      .crumb .ic { width: 10px; height: 10px; }
+      .rhead { margin-top: 6px; display: flex; align-items: center; gap: 12px; }
+      .tag { display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 10px; border-radius: 4px; font-size: 12px; font-weight: 600; background: #F0F0F0; color: var(--w-sec); }
+      .meta { margin-top: 16px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 24px; }
+      .mf { transform-origin: 0 50%; }
+      .mf .l { display: block; font-size: 12px; color: var(--w-sec); }
+      .mf .v { display: block; margin-top: 2px; font-size: 16px; font-weight: 600; color: var(--w-ink); font-variant-numeric: tabular-nums; }
+      .rule { margin: 18px 0 14px; height: 1px; background: var(--w-stroke); }
+      .tiers { margin-top: 10px; display: grid; gap: 8px; }
+      .tier { position: relative; height: 52px; display: flex; align-items: center; gap: 10px; padding: 0 14px; border-radius: 4px; border: 1px dashed rgba(0, 0, 0, 0.26); font-size: 14px; font-weight: 600; color: var(--w-sec); }
+      .tier .ic { width: 18px; height: 18px; }
+      .tier .hl { position: absolute; inset: -1px; border-radius: 4px; border: 2px solid var(--accent); background: rgba(0, 95, 184, 0.05); }
+
+      .card { position: absolute; width: 236px; height: 36px; display: flex; align-items: center; gap: 8px; padding: 0 6px 0 8px; border-radius: 4px; background: #fff; border: 1px solid rgba(0, 0, 0, 0.10); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); font-size: 14px; font-weight: 600; color: var(--w-ink); }
+      .card .ic { width: 16px; height: 16px; color: var(--w-ter); }
+      .card .ex { font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: #F0F0F0; color: var(--w-sec); }
+      .card .more { margin-left: auto; width: 26px; height: 26px; border-radius: 4px; display: grid; place-items: center; color: var(--w-sec); }
+
+      .flyout { position: absolute; width: 268px; padding: 4px; border-radius: 8px; background: #FCFCFC; border: 1px solid rgba(0, 0, 0, 0.08); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16); }
+      .flyout .fh { padding: 8px 12px 6px; font-size: 12px; font-weight: 600; color: var(--w-sec); }
+      .flyout .fi { position: relative; height: 34px; display: flex; align-items: center; padding: 0 12px; border-radius: 4px; font-size: 14px; color: var(--w-ink); }
+      #fiHov { position: absolute; inset: 0; border-radius: 4px; background: var(--w-subtle); }
+
+      .tip { position: absolute; width: 292px; padding: 14px 16px; border-radius: 8px; background: #fff; border: 1px solid rgba(0, 0, 0, 0.07); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.16); font-size: 14px; line-height: 20px; color: var(--w-ink); }
+      .tip b { display: block; margin-bottom: 4px; font-weight: 700; }
+      .tip .tail { position: absolute; left: 36px; bottom: -7px; width: 14px; height: 14px; background: #fff; border-right: 1px solid rgba(0, 0, 0, 0.07); border-bottom: 1px solid rgba(0, 0, 0, 0.07); transform: rotate(45deg); }
+      .tip .btn { margin-top: 10px; height: 28px; font-size: 13px; }
+
+      .foot { position: absolute; left: 0; right: 0; bottom: 0; height: 48px; display: flex; align-items: center; gap: 14px; padding: 0 16px; background: var(--w-base); border-top: 1px solid var(--w-stroke); }
+      .foot .sp { flex: 1; }
+      .stack { position: relative; height: 20px; }
+      .stack > span { position: absolute; right: 0; top: 0; display: flex; align-items: center; gap: 6px; white-space: nowrap; font-size: 13px; font-weight: 600; color: var(--w-sec); }
+      .stack .ic { width: 16px; height: 16px; }
+      .ok { color: #0F7B0F; }
+      #fsW { width: 230px; }
+      #cntW { width: 130px; }
+      #btnW { position: relative; width: 132px; height: 32px; }
+      #btnC { position: absolute; inset: 0; justify-content: center; background: #EBEBEB; border: 1px solid rgba(0, 0, 0, 0.12); color: #5C5C5C; }
+      #onrec { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 6px; border-radius: 4px; background: #F0F0F0; font-size: 14px; font-weight: 600; color: var(--w-sec); }
+      #onrec .ic { width: 14px; height: 14px; }
+
+      #smoke { position: absolute; left: 0; right: 0; top: 32px; bottom: 0; background: rgba(0, 0, 0, 0.30); }
+      #dlg { position: absolute; left: 396px; top: 214px; width: 440px; border-radius: 8px; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 32px 64px rgba(0, 0, 0, 0.22); }
+      .dlg-b { padding: 24px; display: grid; gap: 10px; }
+      .dlg-b .h-app { font-size: 22px; }
+      .dlg-b p { font-size: 14px; line-height: 20px; color: var(--w-ink); }
+      .dlg-f { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 20px 24px; background: var(--w-base); border-top: 1px solid var(--w-stroke); }
+      .dlg-f .btn { justify-content: center; }
+
+      #drawer { position: absolute; right: 0; top: 80px; bottom: 48px; width: 372px; background: #FAFAFA; border-left: 1px solid rgba(0, 0, 0, 0.08); box-shadow: -12px 0 32px rgba(0, 0, 0, 0.10); padding: 18px 20px 0; }
+      .dw-h { display: flex; align-items: flex-start; justify-content: space-between; }
+      .dw-rows { margin-top: 14px; border-top: 1px solid var(--w-stroke); }
+      .dw-row { height: 48px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--w-stroke); font-size: 14px; font-weight: 600; color: var(--w-ink); }
+      .dw-row .ic { width: 18px; height: 18px; color: var(--w-sec); }
+      .dw-row em { margin-left: auto; display: flex; align-items: center; gap: 6px; font-style: normal; font-size: 12px; font-weight: 500; color: var(--w-sec); }
+      .dw-row em .ic { width: 14px; height: 14px; }
+
+      /* ---------- End card ---------- */
+      #hb { position: absolute; left: 0; top: 0; width: 36px; height: 36px; border-radius: 9px; background: var(--accent); color: #fff; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 60, 130, 0.22); }
+      #hbG { position: absolute; left: 50%; top: 50%; width: 24px; height: 24px; margin: -12px 0 0 -12px; fill: currentColor; }
+      #hbL { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 14px; font-size: 38px; font-weight: 800; white-space: nowrap; }
+      #hbL .ic { width: 34px; height: 34px; }
+
+      #cursor { position: absolute; left: 0; top: 0; width: 76px; height: 90px; filter: drop-shadow(0 6px 10px rgba(7, 17, 39, 0.25)); transform-origin: 34% 6%; }
+      .ripple { position: absolute; left: 0; top: 0; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%; border: 4px solid rgba(0, 95, 184, 0.55); }
+    </style>
+  </head>
+  <body>
+    <svg data-hf-id="hf-30au" width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs data-hf-id="hf-mh0t">
+        <symbol data-hf-id="hf-in8k" id="hand" viewBox="0 0 32 38">
+          <path data-hf-id="hf-0bgs" d="M11 2.5c1.4 0 2.5 1.1 2.5 2.5v9.2l1-.1c.4-1.1 1.4-1.8 2.5-1.8 1.3 0 2.3.9 2.5 2.1.5-.3 1-.4 1.6-.4 1.3 0 2.4 1 2.5 2.3.4-.2.9-.3 1.4-.3 1.4 0 2.5 1.1 2.5 2.5v7c0 5-4 9-9 9h-2.6c-2.7 0-5.2-1.3-6.8-3.4l-5.6-7.6c-.8-1.1-.6-2.7.5-3.5 1-.8 2.5-.7 3.4.3l1.6 1.8V5c0-1.4 1.1-2.5 2.5-2.5z" fill="#fff" stroke="#0A2437" stroke-width="2" stroke-linejoin="round" />
+        </symbol>
+<!--ICONS:START-->
+<symbol data-hf-id="hf-vgt5" id="i-arrow_right_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-kqez" d="M10.84 3.13a.5.5 0 0 0-.68.74l6.17 5.63H2.5a.5.5 0 0 0 0 1h13.83l-6.17 5.63a.5.5 0 0 0 .68.74l6.91-6.32a.75.75 0 0 0 0-1.1z" /></symbol>
+<symbol data-hf-id="hf-4mrv" id="i-arrow_sort_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-j1ec" d="M2.35 7.35 5 4.71V16.5a.5.5 0 0 0 1 0V4.7l2.65 2.65a.5.5 0 0 0 .7-.7l-3.49-3.5A.5.5 0 0 0 5.5 3a.5.5 0 0 0-.39.18L1.65 6.65a.5.5 0 1 0 .7.7m15.3 5.3L15 15.29V3.5a.5.5 0 0 0-1 0v11.8l-2.65-2.65a.5.5 0 0 0-.7.7l3.49 3.5a.5.5 0 0 0 .36.15.5.5 0 0 0 .39-.18l3.46-3.47a.5.5 0 1 0-.7-.7" /></symbol>
+<symbol data-hf-id="hf-wkgq" id="i-battery_10_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-ycfx" d="M16 5a3 3 0 0 1 3 3 1 1 0 0 1 1 1v2a1 1 0 0 1-1 1 3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3zM3 6a2 2 0 0 0-2 2v4c0 1.1.9 2 2 2h13a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm13 1a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z" /></symbol>
+<symbol data-hf-id="hf-invx" id="i-checkmark_16_regular" viewBox="0 0 16 16"><path data-hf-id="hf-ncp1" d="M13.86 3.66a.5.5 0 0 1-.02.7l-7.93 7.48a.6.6 0 0 1-.84-.02L2.4 9.1a.5.5 0 0 1 .72-.7l2.4 2.44 7.65-7.2a.5.5 0 0 1 .7.02" /></symbol>
+<symbol data-hf-id="hf-nk97" id="i-checkmark_circle_20_filled" viewBox="0 0 20 20"><path data-hf-id="hf-bibh" d="M10 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16m3.36 5.65a.5.5 0 0 0-.64-.06l-.07.06L9 11.3 7.35 9.65l-.07-.06a.5.5 0 0 0-.7.7l.07.07 2 2 .07.06c.17.11.4.11.56 0l.07-.06 4-4 .07-.08a.5.5 0 0 0-.06-.63" /></symbol>
+<symbol data-hf-id="hf-dupy" id="i-chevron_right_12_regular" viewBox="0 0 12 12"><path data-hf-id="hf-4vlq" d="M4.65 2.15a.5.5 0 0 0 0 .7L7.79 6 4.65 9.15a.5.5 0 1 0 .7.7l3.5-3.5a.5.5 0 0 0 0-.7l-3.5-3.5a.5.5 0 0 0-.7 0" /></symbol>
+<symbol data-hf-id="hf-9i1y" id="i-database_20_filled" viewBox="0 0 20 20"><path data-hf-id="hf-c02r" d="M10 8c3.31 0 6-1.34 6-3s-2.69-3-6-3-6 1.34-6 3 2.69 3 6 3m4.69.02q.72-.36 1.31-.9V15c0 1.66-2.69 3-6 3s-6-1.34-6-3V7.12q.59.54 1.31.9C6.56 8.64 8.22 9 10 9s3.44-.36 4.69-.98" /></symbol>
+<symbol data-hf-id="hf-uzpw" id="i-database_24_regular" viewBox="0 0 24 24"><path data-hf-id="hf-q9fu" d="M4 6c0-.7.32-1.3.77-1.78a6 6 0 0 1 1.8-1.2A14 14 0 0 1 12 2c2.08 0 4 .38 5.43 1.02q1.1.48 1.8 1.2c.45.49.77 1.09.77 1.78v12c0 .7-.32 1.3-.77 1.78q-.7.72-1.8 1.2A14 14 0 0 1 12 22c-2.08 0-4-.38-5.43-1.02a6 6 0 0 1-1.8-1.2A2.6 2.6 0 0 1 4 18zm1.5 0c0 .2.09.46.37.75q.4.46 1.31.86c1.2.54 2.9.89 4.82.89s3.62-.35 4.82-.89q.9-.4 1.31-.86c.28-.3.37-.54.37-.75s-.09-.46-.37-.75q-.4-.46-1.31-.86c-1.2-.54-2.9-.89-4.82-.89s-3.62.35-4.82.89q-.9.4-1.31.86c-.28.3-.37.54-.37.75m13 2.4a7 7 0 0 1-1.07.58A14 14 0 0 1 12 10c-2.08 0-4-.38-5.43-1.02A7 7 0 0 1 5.5 8.4V18c0 .2.09.46.37.75q.4.46 1.31.86c1.2.54 2.9.89 4.82.89s3.62-.35 4.82-.89q.9-.4 1.31-.86c.28-.3.37-.54.37-.75z" /></symbol>
+<symbol data-hf-id="hf-yhv6" id="i-delete_24_regular" viewBox="0 0 24 24"><path data-hf-id="hf-exg9" d="M10 5h4a2 2 0 1 0-4 0M8.5 5a3.5 3.5 0 1 1 7 0h5.75a.75.75 0 0 1 0 1.5h-1.32l-1.17 12.11A3.75 3.75 0 0 1 15.03 22H8.97a3.75 3.75 0 0 1-3.73-3.39L4.07 6.5H2.75a.75.75 0 0 1 0-1.5zm2 4.75a.75.75 0 0 0-1.5 0v7.5a.75.75 0 0 0 1.5 0zM14.25 9c.41 0 .75.34.75.75v7.5a.75.75 0 0 1-1.5 0v-7.5c0-.41.34-.75.75-.75m-7.52 9.47a2.25 2.25 0 0 0 2.24 2.03h6.06c1.15 0 2.12-.88 2.24-2.03L18.42 6.5H5.58z" /></symbol>
+<symbol data-hf-id="hf-59hc" id="i-dismiss_16_regular" viewBox="0 0 16 16"><path data-hf-id="hf-cdbt" d="m2.59 2.72.06-.07a.5.5 0 0 1 .63-.06l.07.06L8 7.29l4.65-4.64a.5.5 0 0 1 .7.7L8.71 8l4.64 4.65c.18.17.2.44.06.63l-.06.07a.5.5 0 0 1-.63.06l-.07-.06L8 8.71l-4.65 4.64a.5.5 0 0 1-.7-.7L7.29 8 2.65 3.35a.5.5 0 0 1-.06-.63l.06-.07z" /></symbol>
+<symbol data-hf-id="hf-xufp" id="i-dismiss_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-qcp6" d="m4.09 4.22.06-.07a.5.5 0 0 1 .63-.06l.07.06L10 9.29l5.15-5.14a.5.5 0 0 1 .63-.06l.07.06c.18.17.2.44.06.63l-.06.07L10.71 10l5.14 5.15c.18.17.2.44.06.63l-.06.07a.5.5 0 0 1-.63.06l-.07-.06L10 10.71l-5.15 5.14a.5.5 0 0 1-.63.06l-.07-.06a.5.5 0 0 1-.06-.63l.06-.07L9.29 10 4.15 4.85a.5.5 0 0 1-.06-.63l.06-.07z" /></symbol>
+<symbol data-hf-id="hf-waro" id="i-document_text_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-zypq" d="M6.5 10a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1zM4 4c0-1.1.9-2 2-2h4.59q.62.01 1.06.44l3.91 3.91c.28.28.44.67.44 1.06V16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8h-3.5A1.5 1.5 0 0 1 10 6.5V3zm5.5 4h3.3L11 3.2v3.3c0 .28.22.5.5.5" /></symbol>
+<symbol data-hf-id="hf-7g71" id="i-folder_24_filled" viewBox="0 0 24 24"><path data-hf-id="hf-ps2u" d="M2 8V6.25C2 4.45 3.46 3 5.25 3h2.88c.6 0 1.17.24 1.59.66l1.53 1.53-2.6 2.59a.8.8 0 0 1-.52.22zm0 1.5v8.25C2 19.55 3.46 21 5.25 21h13.5c1.8 0 3.25-1.46 3.25-3.25v-9c0-1.8-1.46-3.25-3.25-3.25h-5.69L9.72 8.84c-.42.42-1 .66-1.6.66z" /></symbol>
+<symbol data-hf-id="hf-swox" id="i-folder_24_regular" viewBox="0 0 24 24"><path data-hf-id="hf-sq00" d="M3.5 6.25V8h4.63q.31 0 .53-.22l1.53-1.53-1.53-1.53a.8.8 0 0 0-.53-.22H5.25c-.97 0-1.75.78-1.75 1.75m-1.5 0C2 4.45 3.46 3 5.25 3h2.88c.6 0 1.17.24 1.59.66l1.84 1.84h7.19c1.8 0 3.25 1.46 3.25 3.25v9c0 1.8-1.46 3.25-3.25 3.25H5.25A3.25 3.25 0 0 1 2 17.75zM3.5 9.5v8.25c0 .97.78 1.75 1.75 1.75h13.5c.97 0 1.75-.78 1.75-1.75v-9c0-.97-.78-1.75-1.75-1.75h-7.19L9.72 8.84c-.42.42-1 .66-1.6.66z" /></symbol>
+<symbol data-hf-id="hf-gokd" id="i-grid_24_regular" viewBox="0 0 24 24"><path data-hf-id="hf-6u5h" d="M8.75 13C9.99 13 11 14 11 15.25v3.5C11 19.99 10 21 8.75 21h-3.5C4.01 21 3 20 3 18.75v-3.5C3 14.01 4 13 5.25 13zm10 0c1.24 0 2.25 1 2.25 2.25v3.5c0 1.24-1 2.25-2.25 2.25h-3.5C14.01 21 13 20 13 18.75v-3.5c0-1.24 1-2.25 2.25-2.25zm-10 1.5h-3.5a.75.75 0 0 0-.75.75v3.5c0 .41.34.75.75.75h3.5c.41 0 .75-.34.75-.75v-3.5a.75.75 0 0 0-.75-.75m10 0h-3.5a.75.75 0 0 0-.75.75v3.5c0 .41.34.75.75.75h3.5c.41 0 .75-.34.75-.75v-3.5a.75.75 0 0 0-.75-.75M8.75 3C9.99 3 11 4 11 5.25v3.5C11 9.99 10 11 8.75 11h-3.5C4.01 11 3 10 3 8.75v-3.5C3 4.01 4 3 5.25 3zm10 0C19.99 3 21 4 21 5.25v3.5C21 9.99 20 11 18.75 11h-3.5C14.01 11 13 10 13 8.75v-3.5C13 4.01 14 3 15.25 3zm-10 1.5h-3.5a.75.75 0 0 0-.75.75v3.5c0 .41.34.75.75.75h3.5c.41 0 .75-.34.75-.75v-3.5a.75.75 0 0 0-.75-.75m10 0h-3.5a.75.75 0 0 0-.75.75v3.5c0 .41.34.75.75.75h3.5c.41 0 .75-.34.75-.75v-3.5a.75.75 0 0 0-.75-.75" /></symbol>
+<symbol data-hf-id="hf-r549" id="i-info_20_filled" viewBox="0 0 20 20"><path data-hf-id="hf-ncim" d="M18 10a8 8 0 1 0-16 0 8 8 0 0 0 16 0M9.5 8.91a.5.5 0 0 1 1 0v4.69a.5.5 0 0 1-1 0V8.9m-.25-2.16a.75.75 0 1 1 1.5 0 .75.75 0 0 1-1.5 0" /></symbol>
+<symbol data-hf-id="hf-3s3y" id="i-lock_closed_16_filled" viewBox="0 0 16 16"><path data-hf-id="hf-cgyc" d="M8 1a3 3 0 0 1 3 3v2a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8c0-1.1.9-2 2-2V4a3 3 0 0 1 3-3m0 8.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2M8 2a2 2 0 0 0-2 2v2h4V4a2 2 0 0 0-2-2" /></symbol>
+<symbol data-hf-id="hf-4o2c" id="i-lock_closed_16_regular" viewBox="0 0 16 16"><path data-hf-id="hf-9pb3" d="M8 1a3 3 0 0 1 3 3v2a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8c0-1.1.9-2 2-2V4a3 3 0 0 1 3-3M5 7a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm3 2.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2M8 2a2 2 0 0 0-2 2v2h4V4a2 2 0 0 0-2-2" /></symbol>
+<symbol data-hf-id="hf-ivr5" id="i-lock_closed_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-j0rc" d="M10 1a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v6a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 4 15.5v-6c0-1.2.86-2.22 2-2.45V5a4 4 0 0 1 4-4M6.5 8C5.67 8 5 8.67 5 9.5v6c0 .83.67 1.5 1.5 1.5h7c.83 0 1.5-.67 1.5-1.5v-6c0-.83-.67-1.5-1.5-1.5zm3.5 3.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2M10 2a3 3 0 0 0-3 3v2h6V5a3 3 0 0 0-3-3" /></symbol>
+<symbol data-hf-id="hf-f53r" id="i-more_horizontal_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-f6ai" d="M6.25 10a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0m5 0a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0M15 11.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5" /></symbol>
+<symbol data-hf-id="hf-eujg" id="i-people_community_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-gje3" d="M10 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4M7 5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m-1.95 5q-.05.24-.05.5v.54l-2.63.71a.5.5 0 0 0-.35.61l.64 2.42a3 3 0 0 0 3.32 2.2q.35.45.79.83l-.17.05a4 4 0 0 1-4.9-2.82l-.65-2.42a1.5 1.5 0 0 1 1.06-1.84zM15 11.04v-.54q0-.26-.05-.5l2.94.78a1.5 1.5 0 0 1 1.06 1.84l-.64 2.42a4 4 0 0 1-5.07 2.77q.44-.37.78-.84a3 3 0 0 0 3.32-2.2l.65-2.4a.5.5 0 0 0-.36-.62zm0-4.54a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0M16.5 4a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5m-13 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M1 6.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0M7.5 9C6.67 9 6 9.67 6 10.5V14a4 4 0 0 0 8 0v-3.5c0-.83-.67-1.5-1.5-1.5zM7 10.5c0-.28.22-.5.5-.5h5c.28 0 .5.22.5.5V14a3 3 0 1 1-6 0z" /></symbol>
+<symbol data-hf-id="hf-1h4g" id="i-question_circle_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-dlxg" d="M10 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16m0 1a7 7 0 1 0 0 14 7 7 0 0 0 0-14m0 10.5a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5m0-8a2.5 2.5 0 0 1 1.65 4.38l-.15.12-.22.17-.09.07-.16.15c-.33.36-.53.85-.53 1.61a.5.5 0 0 1-1 0 3.2 3.2 0 0 1 1.16-2.62l.25-.19.12-.1A1.5 1.5 0 0 0 10 6.5c-.83 0-1.5.67-1.5 1.5a.5.5 0 0 1-1 0A2.5 2.5 0 0 1 10 5.5" /></symbol>
+<symbol data-hf-id="hf-a72f" id="i-re_order_dots_vertical_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-1jnf" d="M7 5a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2m1 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m5-11a1 1 0 1 0 0-2 1 1 0 0 0 0 2m1 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-1 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2" /></symbol>
+<symbol data-hf-id="hf-bw9l" id="i-search_24_regular" viewBox="0 0 24 24"><path data-hf-id="hf-wwal" d="M16.1 17.16a8 8 0 1 1 1.06-1.06l4.62 4.62a.75.75 0 1 1-1.06 1.06zM17.5 11a6.5 6.5 0 1 0-13 0 6.5 6.5 0 0 0 13 0" /></symbol>
+<symbol data-hf-id="hf-b7o9" id="i-speaker_2_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-6f4o" d="M12 3a1 1 0 0 0-1.68-.73l-3.88 3.6A.5.5 0 0 1 6.1 6H3.5C2.67 6 2 6.67 2 7.5v5c0 .83.67 1.5 1.5 1.5h2.6a.5.5 0 0 1 .34.13l3.88 3.6a1 1 0 0 0 1.68-.74zM7.12 6.6 11 3v14l-3.88-3.6A1.5 1.5 0 0 0 6.1 13H3.5a.5.5 0 0 1-.5-.5v-5c0-.28.22-.5.5-.5h2.6c.38 0 .75-.14 1.02-.4m8.14-1.97a.5.5 0 0 1 .7.04 8 8 0 0 1 0 10.66.5.5 0 0 1-.74-.66 7 7 0 0 0 0-9.34.5.5 0 0 1 .04-.7m-1.18 8.3a.5.5 0 0 1-.18-.68 4.5 4.5 0 0 0 0-4.5.5.5 0 1 1 .86-.5 5.5 5.5 0 0 1 0 5.5.5.5 0 0 1-.68.18" /></symbol>
+<symbol data-hf-id="hf-3jm3" id="i-square_16_regular" viewBox="0 0 16 16"><path data-hf-id="hf-2sap" d="M2 4.5A2.5 2.5 0 0 1 4.5 2h7A2.5 2.5 0 0 1 14 4.5v7a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 11.5zM4.5 3C3.67 3 3 3.67 3 4.5v7c0 .83.67 1.5 1.5 1.5h7c.83 0 1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5z" /></symbol>
+<symbol data-hf-id="hf-x5bk" id="i-square_multiple_16_regular" viewBox="0 0 16 16"><path data-hf-id="hf-9o5s" d="M5.08 4c.21-.58.77-1 1.42-1H10a3 3 0 0 1 3 3v3.5c0 .65-.42 1.2-1 1.41V6a2 2 0 0 0-2-2zM4.5 5h5c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5h-5A1.5 1.5 0 0 1 3 11.5v-5C3 5.67 3.67 5 4.5 5m0 1a.5.5 0 0 0-.5.5v5c0 .28.22.5.5.5h5a.5.5 0 0 0 .5-.5v-5a.5.5 0 0 0-.5-.5z" /></symbol>
+<symbol data-hf-id="hf-tjco" id="i-subtract_16_regular" viewBox="0 0 16 16"><path data-hf-id="hf-r702" d="M3 8c0-.28.22-.5.5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8" /></symbol>
+<symbol data-hf-id="hf-4z50" id="i-text_bullet_list_square_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-nx9b" d="M6.75 8a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5m.75 2.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0M6.75 14a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5M9 7.5c0-.28.22-.5.5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zM9 13.5c0-.28.22-.5.5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M5.75 3h8.5A2.75 2.75 0 0 1 17 5.75v8.5A2.75 2.75 0 0 1 14.25 17h-8.5A2.75 2.75 0 0 1 3 14.25v-8.5A2.75 2.75 0 0 1 5.75 3M4 5.75v8.5c0 .97.78 1.75 1.75 1.75h8.5c.97 0 1.75-.78 1.75-1.75v-8.5C16 4.78 15.22 4 14.25 4h-8.5C4.78 4 4 4.78 4 5.75" /></symbol>
+<symbol data-hf-id="hf-7ynz" id="i-tray_item_add_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-chvq" d="M11 3a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1zm4 0h-3v2h3zm-1.5 4c.28 0 .5.22.5.5v5.8l1.15-1.15a.5.5 0 0 1 .7.7l-2 2a.5.5 0 0 1-.7 0l-2-2a.5.5 0 0 1 .7-.7L13 13.29V7.5c0-.28.22-.5.5-.5M4 12a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1zm4 0H5v2h3zm-5.5 1c.28 0 .5.22.5.5V15a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1.5a.5.5 0 0 1 1 0V15a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-1.5c0-.28.22-.5.5-.5" /></symbol>
+<symbol data-hf-id="hf-fgw8" id="i-wifi_1_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-pexp" d="M16.83 7.38q.62.63 1.14 1.37a.5.5 0 0 1-.83.57 8.61 8.61 0 0 0-14.2 0 .5.5 0 0 1-.82-.58 9.61 9.61 0 0 1 14.71-1.36M14.6 9.36q.71.72 1.19 1.65a.5.5 0 0 1-.89.46q-.4-.8-1.01-1.4a5.45 5.45 0 0 0-8.72 1.38.5.5 0 1 1-.89-.45q.45-.9 1.2-1.64a6.45 6.45 0 0 1 9.12 0m-1.71 2.5q.53.53.85 1.25a.5.5 0 0 1-.92.4 3.03 3.03 0 0 0-5.56-.01.5.5 0 1 1-.92-.4q.3-.72.84-1.25a4.03 4.03 0 0 1 5.7 0m-1.93 1.93a1.3 1.3 0 1 1-1.83 1.83 1.3 1.3 0 0 1 1.83-1.83" /></symbol>
+<!--ICONS:END-->
+      </defs>
+    </svg>
+
+    <div data-hf-id="hf-lwht" id="root" data-composition-id="main" data-start="0" data-duration="47" data-width="1920" data-height="1080">
+      <div data-hf-id="hf-2xc0" id="bg">
+        <div data-hf-id="hf-re09" class="bloom" id="bl-blue" data-layout-allow-overflow=""></div><div data-hf-id="hf-vmup" class="bloom" id="bl-cream" data-layout-allow-overflow=""></div>
+        <div data-hf-id="hf-op2a" class="bloom" id="bl-amber" data-layout-allow-overflow=""></div><div data-hf-id="hf-dl11" class="bloom" id="bl-mint" data-layout-allow-overflow=""></div>
+      </div>
+
+      <!-- Voiceover: Ifeoma Odumodu (ElevenLabs, eleven_multilingual_v2). The film is timed to these lines. -->
+      <audio data-hf-id="hf-0f8k" id="vo1" src="assets/vo/vo1-title.mp3" data-start="0.35" data-duration="3.9" data-track-index="2"></audio>
+      <audio data-hf-id="hf-4gxe" id="vo2" src="assets/vo/vo2-desktop.mp3" data-start="4.3" data-duration="3.0" data-track-index="2"></audio>
+      <audio data-hf-id="hf-6fag" id="vo3" src="assets/vo/vo3-queue.mp3" data-start="7.7" data-duration="6.45" data-track-index="2"></audio>
+      <audio data-hf-id="hf-qabf" id="vo4" src="assets/vo/vo4-score.mp3" data-start="14.4" data-duration="4.55" data-track-index="2"></audio>
+      <audio data-hf-id="hf-5ht8" id="vo5" src="assets/vo/vo5-tier.mp3" data-start="19.2" data-duration="6.64" data-track-index="2"></audio>
+      <audio data-hf-id="hf-g87e" id="vo6" src="assets/vo/vo6-commit.mp3" data-start="26.1" data-duration="4.91" data-track-index="2"></audio>
+      <audio data-hf-id="hf-6cy8" id="vo7" src="assets/vo/vo7-casefile.mp3" data-start="31.5" data-duration="3.06" data-track-index="2"></audio>
+      <audio data-hf-id="hf-zmwp" id="vo8" src="assets/vo/vo8-minimise.mp3" data-start="35.0" data-duration="5.85" data-track-index="2"></audio>
+      <audio data-hf-id="hf-jsh1" id="vo9" src="assets/vo/vo9-begin.mp3" data-start="41.9" data-duration="2.35" data-track-index="2"></audio>
+
+      <div data-hf-id="hf-uu18" id="film" class="clip" data-start="0" data-duration="47" data-track-index="1">
+        <div data-hf-id="hf-t44u" id="drift">
+
+          <!-- ===== 01 Title ===== -->
+          <div data-hf-id="hf-d0er" class="abs" id="s1" style="inset:0">
+            <div data-hf-id="hf-q5vv" class="abs" id="t-eyebrow" style="left:0;right:0;top:500px;text-align:center;font-size:30px;font-weight:800;letter-spacing:0.12em;color:#9A6200">COMPLIANCE SANDBOX</div>
+            <div data-hf-id="hf-dais" class="abs disp" id="t-lock" style="left:0;right:0;top:452px;display:flex;justify-content:center;align-items:center;gap:26px;font-size:150px;color:var(--ink)">
+              <span data-hf-id="hf-5poz" class="w" id="t-a">Behind the</span><span data-hf-id="hf-j9gg" class="w order" id="t-ord">Order</span>
+            </div>
+          </div>
+
+          <!-- ===== The camera: a Windows 11 desktop with the app ===== -->
+          <div data-hf-id="hf-ftaq" id="cam">
+            <div data-hf-id="hf-zaq6" id="desk">
+              <div data-hf-id="hf-778v" id="deskIn">
+                <img data-hf-id="hf-t9lf" id="wall" src="assets/img/wallpaper.jpg" alt="">
+
+                <div data-hf-id="hf-z9me" class="dicons">
+                  <div data-hf-id="hf-mey7" class="dicon"><div data-hf-id="hf-f6ek" class="tile"><svg data-hf-id="hf-e7ru" class="ic" style="width:34px;height:34px;color:#4D6178"><use data-hf-id="hf-kvhx" href="#i-delete_24_regular" /></svg></div><span data-hf-id="hf-5s0u" data-layout-allow-overlap="" data-layout-allow-occlusion="">Recycle Bin</span></div>
+                  <div data-hf-id="hf-ll19" class="dicon" id="diApp"><div data-hf-id="hf-c4c2" id="iconSel"></div><div data-hf-id="hf-0gp6" class="tile apptile" id="diTile"><svg data-hf-id="hf-5l9l" class="ic" style="width:26px;height:26px"><use data-hf-id="hf-zb6n" href="#i-database_24_regular" /></svg></div><span data-hf-id="hf-1mb6" data-layout-allow-overlap="" data-layout-allow-occlusion="">Compliance Sandbox</span></div>
+                  <div data-hf-id="hf-eekv" class="dicon"><div data-hf-id="hf-8r7o" class="tile"><svg data-hf-id="hf-3uw8" class="ic" style="width:38px;height:38px;color:#E9A93A"><use data-hf-id="hf-qgma" href="#i-folder_24_filled" /></svg></div><span data-hf-id="hf-986d" data-layout-allow-overlap="" data-layout-allow-occlusion="">Case files</span></div>
+                </div>
+
+                <!-- Compliance Sandbox -->
+                <div data-hf-id="hf-timj" id="win" data-layout-allow-occlusion="" data-layout-allow-overlap="">
+                  <div data-hf-id="hf-kjhm" class="tbar" id="tbar">
+                    <span data-hf-id="hf-7b18" class="ticon"><svg data-hf-id="hf-ypo9" class="ic"><use data-hf-id="hf-h6zx" href="#i-database_20_filled" /></svg></span>
+                    <span data-hf-id="hf-7d5j" class="ttl">Compliance Sandbox</span>
+                    <div data-hf-id="hf-br8j" class="caps">
+                      <span data-hf-id="hf-9sch" class="cap" id="capMin"><svg data-hf-id="hf-r971" class="ic"><use data-hf-id="hf-74v1" href="#i-subtract_16_regular" /></svg></span>
+                      <span data-hf-id="hf-nhw7" class="cap"><svg data-hf-id="hf-sg44" class="ic"><use data-hf-id="hf-pgqu" href="#i-square_16_regular" /></svg></span>
+                      <span data-hf-id="hf-7o0n" class="cap"><svg data-hf-id="hf-s1t3" class="ic"><use data-hf-id="hf-85bx" href="#i-dismiss_16_regular" /></svg></span>
+                    </div>
+                  </div>
+                  <div data-hf-id="hf-atzm" class="hdr" id="hdr">
+                    <span data-hf-id="hf-cdvb" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="brand"><svg data-hf-id="hf-t8q6" class="ic"><use data-hf-id="hf-f1lr" href="#i-database_24_regular" /></svg>Compliance Review Unit</span>
+                    <div data-hf-id="hf-5rmk" class="tabs">
+                      <span data-hf-id="hf-e0xx" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="tab on">Case review</span>
+                      <span data-hf-id="hf-utpq" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="tab"><svg data-hf-id="hf-suf5" class="ic"><use data-hf-id="hf-bxa9" href="#i-lock_closed_16_regular" /></svg>County review</span>
+                    </div>
+                    <div data-hf-id="hf-t2jr" class="hdr-r">
+                      <span data-hf-id="hf-zhnm" class="btn" id="btnCF"><svg data-hf-id="hf-u1c8" class="ic"><use data-hf-id="hf-okjv" href="#i-document_text_20_regular" /></svg>Case file</span>
+                      <span data-hf-id="hf-4d56" class="ibtn"><svg data-hf-id="hf-tn17" class="ic"><use data-hf-id="hf-ifar" href="#i-question_circle_20_regular" /></svg></span>
+                    </div>
+                  </div>
+
+                  <div data-hf-id="hf-hx5q" class="body" id="body">
+                    <div data-hf-id="hf-rucu" class="lp" id="lp">
+                      <div data-hf-id="hf-we38" class="h-app" style="font-size:22px">Flagged cases</div>
+                      <div data-hf-id="hf-6jej" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="sub">10 awaiting review</div>
+                      <div data-hf-id="hf-t092" class="tbox"><svg data-hf-id="hf-utya" class="ic"><use data-hf-id="hf-atey" href="#i-search_24_regular" /></svg>Search cases</div>
+                      <div data-hf-id="hf-en3o" class="th"><span data-hf-id="hf-uckh"></span><span data-hf-id="hf-6ukl">Case</span><span data-hf-id="hf-b420">Model score<svg data-hf-id="hf-ufn9" class="ic"><use data-hf-id="hf-6n8g" href="#i-arrow_sort_20_regular" /></svg></span></div>
+                      <div data-hf-id="hf-jiiy" class="rows" id="rows">
+                        <div data-hf-id="hf-diiy" class="row r-o"><svg data-hf-id="hf-4n9j" class="ic"><use data-hf-id="hf-atxo" href="#i-re_order_dots_vertical_20_regular" /></svg><span data-hf-id="hf-eu10">Case 01</span><b data-hf-id="hf-qqx2" class="na">—</b></div>
+                        <div data-hf-id="hf-u8r2" class="row r-o"><svg data-hf-id="hf-51kk" class="ic"><use data-hf-id="hf-6dyc" href="#i-re_order_dots_vertical_20_regular" /></svg><span data-hf-id="hf-dn3x">Case 02</span><b data-hf-id="hf-k01a">91%</b></div>
+                        <div data-hf-id="hf-tp7q" class="row" id="rowT"><div data-hf-id="hf-oeak" id="rowTbg"></div><i data-hf-id="hf-1vfo" id="rowTpill"></i><svg data-hf-id="hf-jmdw" class="ic" style="position:relative"><use data-hf-id="hf-5719" href="#i-re_order_dots_vertical_20_regular" /></svg><span data-hf-id="hf-wusl" style="position:relative">Tunde Balogun</span><b data-hf-id="hf-eao4" style="position:relative">88%</b></div>
+                        <div data-hf-id="hf-un23" class="row r-o"><svg data-hf-id="hf-3unh" class="ic"><use data-hf-id="hf-5lca" href="#i-re_order_dots_vertical_20_regular" /></svg><span data-hf-id="hf-g0y3">Case 04</span><b data-hf-id="hf-evnu" class="na">—</b></div>
+                        <div data-hf-id="hf-v1d4" class="row r-o"><svg data-hf-id="hf-48yi" class="ic"><use data-hf-id="hf-7kvf" href="#i-re_order_dots_vertical_20_regular" /></svg><span data-hf-id="hf-gf94">Case 05</span><b data-hf-id="hf-f9yv" class="na">—</b></div>
+                        <div data-hf-id="hf-s97x" class="row r-o"><svg data-hf-id="hf-68hn" class="ic"><use data-hf-id="hf-7z6g" href="#i-re_order_dots_vertical_20_regular" /></svg><span data-hf-id="hf-f8c1">Case 06</span><b data-hf-id="hf-fo9w" class="na">—</b></div>
+                        <div data-hf-id="hf-sniy" class="row r-o"><svg data-hf-id="hf-6mso" class="ic"><use data-hf-id="hf-6s9d" href="#i-re_order_dots_vertical_20_regular" /></svg><span data-hf-id="hf-fmn2">Case 07</span><b data-hf-id="hf-g2kx" class="na">—</b></div>
+                        <div data-hf-id="hf-t1tz" class="row r-o"><svg data-hf-id="hf-5fvl" class="ic"><use data-hf-id="hf-76ke" href="#i-re_order_dots_vertical_20_regular" /></svg><span data-hf-id="hf-hm67">Case 08</span><b data-hf-id="hf-ggvy" class="na">—</b></div>
+                        <div data-hf-id="hf-tg50" class="row r-o"><svg data-hf-id="hf-5u6m" class="ic"><use data-hf-id="hf-963j" href="#i-re_order_dots_vertical_20_regular" /></svg><span data-hf-id="hf-i0h8">Case 09</span><b data-hf-id="hf-gv6z" class="na">—</b></div>
+                        <div data-hf-id="hf-x0w9" class="row r-o"><svg data-hf-id="hf-7tpr" class="ic"><use data-hf-id="hf-9kek" href="#i-re_order_dots_vertical_20_regular" /></svg><span data-hf-id="hf-do26">Case 10</span><b data-hf-id="hf-h9i0" class="na">—</b></div>
+                      </div>
+                    </div>
+
+                    <div data-hf-id="hf-yec2" class="rp" id="rp">
+                      <div data-hf-id="hf-o8xe" class="empty" id="empty"><svg data-hf-id="hf-880s" class="ic"><use data-hf-id="hf-pzzf" href="#i-document_text_20_regular" /></svg>Select a case to review</div>
+                      <div data-hf-id="hf-mwq5" id="rec">
+                        <div data-hf-id="hf-h41a" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="crumb" id="crumb">Case review<svg data-hf-id="hf-h7ho" class="ic"><use data-hf-id="hf-m393" href="#i-chevron_right_12_regular" /></svg>Triage</div>
+                        <div data-hf-id="hf-veue" class="rhead" id="rhead"><span data-hf-id="hf-mair" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="h-app" style="font-size:30px">Tunde Balogun</span><span data-hf-id="hf-iiqe" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="tag">Review pending</span></div>
+                        <div data-hf-id="hf-oie2" class="meta" id="meta">
+                          <div data-hf-id="hf-ukt0" class="mf" id="mfScore"><span data-hf-id="hf-h3i4" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="l">Model score</span><span data-hf-id="hf-wafy" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="v">88%</span></div>
+                          <div data-hf-id="hf-0c83" class="mf mo"><span data-hf-id="hf-sj5p" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="l">Missed DOT visits</span><span data-hf-id="hf-lsjm" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="v">1</span></div>
+                          <div data-hf-id="hf-aacj" class="mf mo"><span data-hf-id="hf-w9yn" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="l">Order history</span><span data-hf-id="hf-6w23" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="v">First order</span></div>
+                          <div data-hf-id="hf-9w1i" class="mf mo"><span data-hf-id="hf-1p65" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="l">Primary language</span><span data-hf-id="hf-k7xj" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="v">Yoruba</span></div>
+                          <div data-hf-id="hf-9hqh" class="mf mo"><span data-hf-id="hf-u1av" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="l">Visit context</span><span data-hf-id="hf-ujh3" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="v">Work-shift conflict</span></div>
+                          <div data-hf-id="hf-93fg" class="mf mo"><span data-hf-id="hf-scxt" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="l">Interpreter requests</span><span data-hf-id="hf-11n0" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="v">2 · Unfulfilled</span></div>
+                        </div>
+                        <div data-hf-id="hf-a46i" class="rule"></div>
+                        <div data-hf-id="hf-aqtc" id="tierBlock">
+                          <div data-hf-id="hf-11ba" class="h-app" style="font-size:18px">Review tier</div>
+                          <div data-hf-id="hf-wibp" class="sub" style="font-size:13px">Assign each case to a tier.</div>
+                          <div data-hf-id="hf-duc8" class="tiers" id="tiers">
+                            <div data-hf-id="hf-wy60" class="tier" id="tier1"><svg data-hf-id="hf-gt6n" class="ic"><use data-hf-id="hf-o8wk" href="#i-tray_item_add_20_regular" /></svg>Prepare detention petition</div>
+                            <div data-hf-id="hf-5rus" class="tier" id="tier2"><div data-hf-id="hf-wcns" class="hl" id="hl2"></div><svg data-hf-id="hf-p2y4" class="ic" style="position:relative"><use data-hf-id="hf-luek" href="#i-tray_item_add_20_regular" /></svg><span data-hf-id="hf-g10j" style="position:relative">Enhanced monitoring this week</span></div>
+                            <div data-hf-id="hf-6jil" class="tier" id="tier3"><div data-hf-id="hf-zbxd" class="hl" id="hl3"></div><svg data-hf-id="hf-nw11" class="ic" style="position:relative"><use data-hf-id="hf-knhh" href="#i-tray_item_add_20_regular" /></svg><span data-hf-id="hf-b4v4" data-layout-allow-overlap="" data-layout-allow-occlusion="" style="position:relative">Routine follow-up</span></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- teaching tip, demo card and its flyout -->
+                      <div data-hf-id="hf-7onj" class="tip" id="tip" data-layout-allow-occlusion="" data-layout-allow-overlap="" style="left:520px;top:146px"><div data-hf-id="hf-1jja" class="tail"></div><b data-hf-id="hf-6zdv">Assign each case</b>Drag a case into a tier, or select it and choose.<br data-hf-id="hf-x5px"><span data-hf-id="hf-6e4s" class="btn">Got it</span></div>
+                      <div data-hf-id="hf-vt9t" class="card" id="card" data-layout-allow-occlusion="" data-layout-allow-overlap=""><svg data-hf-id="hf-gevm" class="ic"><use data-hf-id="hf-b1bw" href="#i-re_order_dots_vertical_20_regular" /></svg>Demo case<span data-hf-id="hf-kaya" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="ex">Example</span><span data-hf-id="hf-ux7l" class="more" id="cardMore"><svg data-hf-id="hf-vfa9" class="ic" style="width:18px;height:18px"><use data-hf-id="hf-izhs" href="#i-more_horizontal_20_regular" /></svg></span></div>
+                      <div data-hf-id="hf-i80g" class="flyout" id="fly" data-layout-allow-occlusion="" data-layout-allow-overlap="">
+                        <div data-hf-id="hf-yuxg" class="fh">Move to</div>
+                        <div data-hf-id="hf-s58s" class="fi">Prepare detention petition</div>
+                        <div data-hf-id="hf-my9n" class="fi" id="fiE"><div data-hf-id="hf-dj61" id="fiHov"></div><span data-hf-id="hf-k3s3" style="position:relative">Enhanced monitoring this week</span></div>
+                        <div data-hf-id="hf-158c" class="fi">Routine follow-up</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div data-hf-id="hf-7fvm" class="foot" id="foot">
+                    <span data-hf-id="hf-lxjd" class="btn"><svg data-hf-id="hf-g0kl" class="ic"><use data-hf-id="hf-ploe" href="#i-document_text_20_regular" /></svg>Triage note</span>
+                    <span data-hf-id="hf-uym4" class="sp"></span>
+                    <div data-hf-id="hf-9t8y" class="stack" id="fsW">
+                      <span data-hf-id="hf-le2p" id="fs0">No changes yet</span>
+                      <span data-hf-id="hf-m78r" id="fs1" class="ok"><svg data-hf-id="hf-isps" class="ic"><use data-hf-id="hf-9qg8" href="#i-checkmark_circle_20_filled" /></svg>Draft saved</span>
+                      <span data-hf-id="hf-gwvm" id="fs2"><svg data-hf-id="hf-ieer" class="ic"><use data-hf-id="hf-sb0f" href="#i-lock_closed_16_filled" /></svg>Triage confirmed</span>
+                    </div>
+                    <div data-hf-id="hf-7svi" class="stack" id="cntW">
+                      <span data-hf-id="hf-h1s1" data-layout-allow-overlap="" data-layout-allow-occlusion="" id="cnt0">0 of 10 assigned</span><span data-hf-id="hf-jvqp" data-layout-allow-overlap="" data-layout-allow-occlusion="" id="cnt1">1 of 10 assigned</span><span data-hf-id="hf-hpf2" data-layout-allow-overlap="" data-layout-allow-occlusion="" id="cnt2">10 of 10 assigned</span>
+                    </div>
+                    <div data-hf-id="hf-wt2i" id="btnW"><span data-hf-id="hf-3f4m" class="btn" id="btnC">Confirm triage</span><span data-hf-id="hf-a1tt" id="onrec"><svg data-hf-id="hf-i03q" class="ic"><use data-hf-id="hf-0gxr" href="#i-lock_closed_16_filled" /></svg>On record</span></div>
+                  </div>
+
+                  <div data-hf-id="hf-ke9s" id="drawer" data-layout-allow-occlusion="" data-layout-allow-overlap="">
+                    <div data-hf-id="hf-rwfw" class="dw-h">
+                      <div data-hf-id="hf-yeow"><div data-hf-id="hf-3t1p" class="h-app" style="font-size:22px">Case file</div><div data-hf-id="hf-jwqw" class="sub">Tunde Balogun</div></div>
+                      <span data-hf-id="hf-p4r2" class="ibtn"><svg data-hf-id="hf-e061" class="ic" style="width:16px;height:16px"><use data-hf-id="hf-ub16" href="#i-dismiss_20_regular" /></svg></span>
+                    </div>
+                    <div data-hf-id="hf-sn3p" class="dw-rows" id="dwRows">
+                      <div data-hf-id="hf-lm3q" class="dw-row"><svg data-hf-id="hf-hlsp" class="ic"><use data-hf-id="hf-vrfq" href="#i-lock_closed_20_regular" /></svg>Triage decision<em data-hf-id="hf-lcaw">Confirmed</em></div>
+                      <div data-hf-id="hf-h3cc" class="dw-row"><svg data-hf-id="hf-e11g" class="ic"><use data-hf-id="hf-p7dd" href="#i-document_text_20_regular" /></svg>Triage note<em data-hf-id="hf-x2j6">Not yet recorded</em></div>
+                      <div data-hf-id="hf-lrlw" class="dw-row"><svg data-hf-id="hf-dmqf" class="ic"><use data-hf-id="hf-ot2c" href="#i-document_text_20_regular" /></svg>Score annotations<em data-hf-id="hf-e6vq">Not yet recorded</em></div>
+                      <div data-hf-id="hf-pebk" class="dw-row"><svg data-hf-id="hf-hz5h" class="ic"><use data-hf-id="hf-oerb" href="#i-document_text_20_regular" /></svg>Social-worker note<em data-hf-id="hf-el6r">Not yet recorded</em></div>
+                      <div data-hf-id="hf-1uhs" class="dw-row"><svg data-hf-id="hf-idgi" class="ic"><use data-hf-id="hf-o0ga" href="#i-document_text_20_regular" /></svg>Interview record<em data-hf-id="hf-ezhs">Not yet recorded</em></div>
+                      <div data-hf-id="hf-4dz1" class="dw-row"><svg data-hf-id="hf-irrj" class="ic"><use data-hf-id="hf-nm59" href="#i-document_text_20_regular" /></svg>Weighting rationale<em data-hf-id="hf-c7cl">Not yet recorded</em></div>
+                    </div>
+                  </div>
+
+                  <div data-hf-id="hf-jksy" id="smoke" data-layout-allow-occlusion="" data-layout-allow-overlap=""></div>
+                  <div data-hf-id="hf-a57e" id="dlg" data-layout-allow-occlusion="" data-layout-allow-overlap="">
+                    <div data-hf-id="hf-zl9m" class="dlg-b"><div data-hf-id="hf-1uif" class="h-app">Confirm triage?</div><p data-hf-id="hf-u9tt">You can't change tiers after you confirm.</p></div>
+                    <div data-hf-id="hf-mz9q" class="dlg-f"><span data-hf-id="hf-g1qy" class="btn accent" id="dlgOk">Confirm</span><span data-hf-id="hf-ylcp" class="btn">Cancel</span></div>
+                  </div>
+                </div>
+
+                <div data-hf-id="hf-j5x9" id="taskbar">
+                  <div data-hf-id="hf-tyo7" class="tb-mid">
+                    <span data-hf-id="hf-l4q9" class="tbi" style="color:var(--accent)"><svg data-hf-id="hf-j62k" class="ic"><use data-hf-id="hf-b63m" href="#i-grid_24_regular" /></svg></span>
+                    <span data-hf-id="hf-gf0g" class="tbi"><svg data-hf-id="hf-jkdl" class="ic"><use data-hf-id="hf-sg8e" href="#i-search_24_regular" /></svg></span>
+                    <span data-hf-id="hf-xdjc" class="tbi" style="color:#E9A93A"><svg data-hf-id="hf-jyom" class="ic"><use data-hf-id="hf-y9ae" href="#i-folder_24_filled" /></svg></span>
+                    <span data-hf-id="hf-vz5m" class="tbi" id="tbiApp"><span data-hf-id="hf-b7ep" id="tbApp"><svg data-hf-id="hf-kczn" class="ic"><use data-hf-id="hf-enaq" href="#i-database_24_regular" /></svg></span><i data-hf-id="hf-t49w" id="ind"></i></span>
+                  </div>
+                  <div data-hf-id="hf-xugg" class="tray">
+                    <svg data-hf-id="hf-krao" class="ic"><use data-hf-id="hf-pgjr" href="#i-wifi_1_20_regular" /></svg>
+                    <svg data-hf-id="hf-esp9" class="ic"><use data-hf-id="hf-m83i" href="#i-speaker_2_20_regular" /></svg>
+                    <div data-hf-id="hf-zwhu" class="clock"><span data-hf-id="hf-0re3">09:41</span><span data-hf-id="hf-1gq1">12/10/2026</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- headlines (above the camera) -->
+          <div data-hf-id="hf-2cub" id="scrim" data-layout-allow-occlusion="" data-layout-allow-overlap=""></div>
+          <div data-hf-id="hf-m66o" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="headline" id="h3" style="left:1030px;right:0;top:470px;font-size:80px"><span data-hf-id="hf-a278" class="w">Start</span><span data-hf-id="hf-vjqo" class="w">with</span><span data-hf-id="hf-9o0j" class="w">the</span><span data-hf-id="hf-khu5" class="w em">queue</span></div>
+          <div data-hf-id="hf-ha1v" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="headline" id="h4" style="left:0;right:0;top:96px"><span data-hf-id="hf-69yk" class="w">Read</span><span data-hf-id="hf-5g8v" class="w">beyond</span><span data-hf-id="hf-cto3" class="w">the</span><span data-hf-id="hf-r6rk" class="w em">score</span></div>
+          <div data-hf-id="hf-8l4a" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="headline" id="h5" style="left:0;right:0;top:96px"><span data-hf-id="hf-g4ix" class="w">Assign</span><span data-hf-id="hf-b7a3" class="w">a</span><span data-hf-id="hf-0bgi" class="w em">review</span><span data-hf-id="hf-eeuq" class="w em">tier</span></div>
+          <div data-hf-id="hf-dit5" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="headline" id="h6" style="left:0;right:0;top:96px"><span data-hf-id="hf-zjhk" class="w">Drafts</span><span data-hf-id="hf-qli9" class="w">save.</span><span data-hf-id="hf-1nr1" class="w k">Confirm</span><span data-hf-id="hf-ptba" class="w em">commits.</span></div>
+          <div data-hf-id="hf-1cph" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="headline" id="h7" style="left:0;right:1060px;top:470px"><span data-hf-id="hf-civn" class="w">Your</span><span data-hf-id="hf-bdom" class="w em">case</span><span data-hf-id="hf-rlz0" class="w em">file</span></div>
+          <div data-hf-id="hf-ihlo" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="headline" id="h8" style="left:0;right:0;top:150px"><span data-hf-id="hf-hryt" class="w">Minimise</span><span data-hf-id="hf-rwml" class="w em">anytime</span></div>
+
+          <!-- ===== 09 End card ===== -->
+          <div data-hf-id="hf-0wcr" class="abs" id="s9" style="inset:0">
+            <div data-hf-id="hf-5c33" class="abs" id="e-title" style="left:0;right:0;top:372px;display:flex;justify-content:center;align-items:center;gap:22px">
+              <img data-hf-id="hf-6suq" src="assets/img/miva-mark.png" alt="" style="width:74px;height:auto;display:block">
+              <span data-hf-id="hf-fj6w" class="disp" style="font-size:96px;color:var(--ink)">Behind the</span><span data-hf-id="hf-ufqc" class="disp order" style="font-size:96px;padding:0 20px 8px;border-radius:16px">Order</span>
+            </div>
+            <div data-hf-id="hf-bg0h" class="abs" id="e-plan" style="left:0;right:0;top:700px;display:flex;justify-content:center;gap:0 0.4em;font-size:32px;font-weight:600;color:var(--mid)">
+              <span data-hf-id="hf-ouds" class="w">Case review</span><span data-hf-id="hf-jh5p" class="w">·</span><span data-hf-id="hf-hq35" class="w">then county review</span>
+            </div>
+          </div>
+          <div data-hf-id="hf-53f3" id="hb"><svg data-hf-id="hf-8p5n" id="hbG"><use data-hf-id="hf-e8zp" href="#i-database_24_regular" /></svg><div data-hf-id="hf-ev7h" id="hbL">Let's begin<svg data-hf-id="hf-f70a" class="ic"><use data-hf-id="hf-i4fq" href="#i-arrow_right_20_regular" /></svg></div></div>
+
+          <!-- interaction layer -->
+          <div data-hf-id="hf-ganz" class="ripple" id="rp1"></div><div data-hf-id="hf-5f6c" class="ripple" id="rp2"></div><div data-hf-id="hf-66u5" class="ripple" id="rp3"></div><div data-hf-id="hf-oyju" class="ripple" id="rp4"></div>
+          <div data-hf-id="hf-swnv" class="ripple" id="rp5"></div><div data-hf-id="hf-k8s0" class="ripple" id="rp6"></div><div data-hf-id="hf-l0ft" class="ripple" id="rp7"></div><div data-hf-id="hf-3s5i" class="ripple" id="rp8"></div>
+          <div data-hf-id="hf-7q9j" class="ripple" id="rp9"></div>
+          <svg data-hf-id="hf-mn5w" id="cursor" viewBox="0 0 32 38" aria-hidden="true"><use data-hf-id="hf-9ikz" href="#hand" /></svg>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const D = 47;
+        const tl = gsap.timeline({ paused: true });
+        gsap.registerPlugin(CustomEase);
+        const DEC = CustomEase.create("emphDecel", "0.05,0.7,0.1,1");
+        const ACC = CustomEase.create("emphAccel", "0.3,0,0.8,0.15");
+        const STD = CustomEase.create("standard", "0.2,0,0,1");
+        const GIO = CustomEase.create("gentleInOut", "0.65,0,0.35,1");
+        const POP = "back.out(1.6)";
+        const $ = (s) => document.querySelector(s);
+
+        // ---- State-tracking tween helper: every tween is a fromTo whose from-state is the
+        //      element's last authored state, so the timeline is seek-safe in both directions.
+        const DEF = { opacity: 1, blur: 0, x: 0, y: 0, scale: 1, scaleX: 1, scaleY: 1, rotationX: 0, rotationY: 0 };
+        const S = new Map();
+        const key = (t) => (typeof t === "string" ? t : t.id ? "#" + t.id : t);
+        const toGsap = (o) => {
+          const r = {};
+          for (const k in o) { if (k === "blur") r.filter = `blur(${o[k]}px)`; else r[k] = o[k]; }
+          return r;
+        };
+        function init(t, props) {
+          if (Array.isArray(t)) return t.forEach((x) => init(x, props));
+          const k = key(t);
+          S.set(k, Object.assign({}, S.get(k) || {}, props));
+          gsap.set(t, toGsap(props));
+        }
+        function go(t, to, at, dur, ease, extra) {
+          if (Array.isArray(t)) return t.forEach((x) => go(x, to, at, dur, ease, extra));
+          const k = key(t);
+          const cur = S.get(k) || {};
+          const from = {};
+          for (const p in to) from[p] = p in cur ? cur[p] : DEF[p];
+          S.set(k, Object.assign({}, cur, to));
+          tl.fromTo(t, toGsap(from), Object.assign(toGsap(to), { duration: dur, ease: ease || DEC, immediateRender: false }, extra || {}), at);
+        }
+        const wordsIn = (sel, at, stagger = 0.12) =>
+          tl.fromTo(`${sel} .w`, { opacity: 0, y: 22, filter: "blur(20px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.42, ease: DEC, stagger, immediateRender: false }, at);
+        const wordsOut = (sel, at) =>
+          tl.fromTo(`${sel} .w`, { opacity: 1, y: 0, filter: "blur(0px)" }, { opacity: 0, y: -16, filter: "blur(18px)", duration: 0.24, ease: ACC, stagger: 0.03, immediateRender: false }, at);
+
+        function build() {
+          // ---------- Measure at rest (camera, desk and drift all at identity) ----------
+          const root = $("#root").getBoundingClientRect();
+          const k = root.width / 1920;
+          const R = (el) => { const r = (typeof el === "string" ? $(el) : el).getBoundingClientRect(); return { x: (r.left - root.left) / k, y: (r.top - root.top) / k, w: r.width / k, h: r.height / k }; };
+          const C = (r) => ({ x: r.x + r.w / 2, y: r.y + r.h / 2 });
+          const EP = 1.5; // the desktop is authored in effective px and shown at 150%
+
+          const winR = R("#win"), lpR = R("#lp"), metaR = R("#meta"), tiersR = R("#tiers"), dlgR = R("#dlg"), drawerR = R("#drawer");
+          const rowTR = R("#rowT"), tier2R = R("#tier2"), tier3R = R("#tier3"), cardMoreR = R("#cardMore"), fiER = R("#fiE");
+          const fsR = R("#fsW"), btnR = R("#btnW"), dlgOkR = R("#dlgOk"), btnCFR = R("#btnCF"), capMinR = R("#capMin");
+          const tileR = R("#tbApp"), diTileR = R("#diTile"), rpR = R("#rp");
+
+          const cardW = 236 * EP, cardH = 36 * EP;
+          const card0 = { x: lpR.x + lpR.w - cardW * 0.55, y: tier3R.y + 4 };      // canvas, top-left
+          const slot = (tr) => ({ x: tr.x + tr.w - 12 * EP - cardW, y: tr.y + (tr.h - cardH) / 2 });
+          const s3 = slot(tier3R), s2 = slot(tier2R);
+          // flyout sits just above the card's More button, right-aligned to it (measured at rest)
+          const flyH = R("#fly").h;
+          gsap.set("#fly", { left: (s3.x + cardW - 268 * EP - rpR.x) / EP + 6, top: (s3.y - flyH - 4 * EP - rpR.y) / EP });
+          const fiEc = C(R("#fiE"));
+
+          // Camera states: put point p at screen (tx, ty) at scale s (camera origin 0 0).
+          const focus = (p, s, tx, ty) => ({ scale: s, x: tx - s * p.x, y: ty - s * p.y });
+          const FULL = { scale: 1, x: 0, y: 0 };
+          const Q = focus(C(lpR), 1.2, 600, 560);
+          const RR = focus(C(metaR), 1.38, 960, 560);
+          const TT = focus(C(tiersR), 1.3, 960, 660);
+          const FF = focus({ x: (fsR.x + btnR.x + btnR.w) / 2, y: C(btnR).y }, 1.55, 960, 700);
+          const DD = focus(C(dlgR), 1.3, 960, 610);
+          const CF = focus(C(drawerR), 1.25, 1150, 610);
+          const via = (p, st) => ({ x: st.x + st.scale * p.x, y: st.y + st.scale * p.y });
+
+          // ---------- Initial state at t=0 ----------
+          init("#cam", Object.assign({ transformOrigin: "0 0" }, FULL));
+          init("#desk", { opacity: 0, blur: 0, scale: 0.78, x: 0, y: 0, rotationX: 0, rotationY: 0, transformPerspective: 2400, borderRadius: 22 });
+          init("#win", { opacity: 0, scale: 0.94, x: 0, y: 0, blur: 0 });
+          init("#iconSel", { opacity: 0 });
+          init("#ind", { opacity: 0, width: 16, marginLeft: -8, backgroundColor: "#005FB8" });
+          init("#rec", { opacity: 0 });
+          init("#rowTbg", { opacity: 0 }); init("#rowTpill", { opacity: 0 });
+          init(".r-o", { opacity: 1, blur: 0 });
+          init(["#hl2", "#hl3"], { opacity: 0 });
+          init("#tip", { opacity: 0, y: 10, scale: 0.97 });
+          init("#card", { opacity: 0, x: 0, y: 0, scale: 1 });
+          init("#fly", { opacity: 0, y: -6 });
+          init("#fiHov", { opacity: 0 });
+          init(["#fs1", "#fs2", "#cnt1", "#cnt2", "#onrec"], { opacity: 0 });
+          init("#btnC", { opacity: 1, backgroundColor: "#EDEDED", color: "#5C5C5C", scale: 1 });
+          init("#smoke", { opacity: 0 }); init("#dlg", { opacity: 0, scale: 1.05 });
+          init("#drawer", { opacity: 0, x: 380 });
+          init(["#lp", "#rp", "#hdr", "#foot", "#meta", "#tierBlock", "#mfScore", ".mo", "#rhead", "#crumb", "#tiers"], { blur: 0, opacity: 1 });
+          init("#mfScore", { scale: 1 });
+          init("#scrim", { opacity: 0 });
+          init(["#s9", "#e-title", "#hb", "#hbL", "#cursor", ".ripple"], { opacity: 0 });
+          init(".ripple", { scale: 0 });
+          gsap.set(["#t-eyebrow", "#t-a", "#t-ord", ".headline .w", "#e-plan .w"], { opacity: 0 });
+
+          // ---------- Ambient: blooms drift, the whole film breathes in slowly ----------
+          go("#bl-blue", { x: 70, y: 50 }, 0, D, "sine.inOut");
+          go("#bl-cream", { x: -60, y: 60 }, 0, D, "sine.inOut");
+          go("#bl-amber", { x: 60, y: -50 }, 0, D, "sine.inOut");
+          go("#bl-mint", { x: -70, y: -40 }, 0, D, "sine.inOut");
+          init("#drift", { scale: 1, transformOrigin: "50% 50%" });
+          go("#drift", { scale: 1.03 }, 0, D, "sine.inOut");
+
+          // ---------- Cursor helpers (fingertip offset inside the 76px hand) ----------
+          const tipX = 26, tipY = 6;
+          let rp = 0;
+          function click(p, arrive, press, opts = {}) {
+            const from = opts.from || { x: 1960, y: 1140 };
+            go("#cursor", { opacity: 1, x: from.x, y: from.y, scale: 1 }, arrive - 0.01, 0.01, "none");
+            go("#cursor", { x: p.x - tipX }, arrive, press - arrive - 0.1, STD);
+            tl.fromTo("#cursor", { y: from.y }, { y: p.y - tipY, duration: press - arrive - 0.1, ease: "power3.out", immediateRender: false }, arrive);
+            S.get("#cursor").y = p.y - tipY;
+            tl.fromTo("#cursor", { scale: 1 }, { scale: 0.92, duration: 0.12, ease: "power2.in", yoyo: true, repeat: 1, immediateRender: false }, press);
+            const r = "#rp" + ++rp;
+            gsap.set(r, { left: p.x, top: p.y });
+            tl.fromTo(r, { opacity: 1, scale: 0 }, { opacity: 0, scale: 3, duration: 0.55, ease: "power2.out", immediateRender: false }, press + 0.02);
+          }
+          function leave(at, dx = 170, dy = 230) {
+            const c = S.get("#cursor");
+            go("#cursor", { opacity: 0, x: c.x + dx, y: c.y + dy }, at, 0.32, ACC);
+          }
+          function moveTo(p, at, dur, ease) { go("#cursor", { x: p.x - tipX, y: p.y - tipY }, at, dur, ease || STD); }
+
+          // ===== 01 Title (0–3.3) =====
+          tl.fromTo("#t-eyebrow", { opacity: 0, y: 20, scale: 1.05, filter: "blur(20px)" }, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.35, ease: DEC, immediateRender: false }, 0.05);
+          tl.fromTo("#t-eyebrow", { opacity: 1, y: 0, filter: "blur(0px)" }, { opacity: 0, y: -14, filter: "blur(16px)", duration: 0.2, ease: ACC, immediateRender: false }, 0.62);
+          tl.fromTo("#t-a", { opacity: 0, x: 110, filter: "blur(20px)" }, { opacity: 1, x: 70, filter: "blur(0px)", duration: 0.42, ease: DEC, immediateRender: false }, 0.72);
+          tl.fromTo("#t-ord", { opacity: 0, scale: 0.6, rotation: 0, filter: "blur(15px)" }, { opacity: 1, scale: 1, rotation: -3, filter: "blur(0px)", duration: 0.42, ease: POP, immediateRender: false }, 1.12);
+          tl.fromTo("#t-a", { x: 70 }, { x: 0, duration: 0.42, ease: STD, immediateRender: false }, 1.15);
+          init("#t-lock", { scale: 1, opacity: 1, blur: 0 });
+          go("#t-lock", { scale: 1.03 }, 1.5, 1.3, "sine.out");
+          go("#t-lock", { scale: 1.15, opacity: 0, blur: 25 }, 2.85, 0.4, ACC);
+
+          // ===== 02 Desktop → open the app (3.1–7.5) =====
+          go("#desk", { opacity: 1 }, 3.05, 0.25, "power1.out");
+          init("#desk", { blur: 30, x: 140, y: 170, rotationY: -18, rotationX: 7 });
+          go("#desk", { blur: 0, x: 0, y: 0, scale: 0.84, rotationY: -9, rotationX: 4 }, 3.05, 0.8);
+          go("#desk", { rotationY: 0, rotationX: 0, scale: 0.86 }, 3.95, 0.55, STD);
+          const card86 = (p) => ({ x: 960 + 0.86 * (p.x - 960), y: 540 + 0.86 * (p.y - 540) });
+          go("#iconSel", { opacity: 1 }, 4.85, 0.12, "none");
+          click(card86(C(diTileR)), 4.35, 5.0);
+          leave(5.25);
+          go("#desk", { scale: 1, borderRadius: 0 }, 5.3, 0.8);
+          init("#win", { transformOrigin: "50% 50%" });
+          go("#win", { opacity: 1, scale: 1 }, 5.42, 0.36, DEC);
+          go("#iconSel", { opacity: 0 }, 5.6, 0.2, "none");
+          go("#ind", { opacity: 1 }, 5.45, 0.2, "none");
+          tl.fromTo("#rows .row", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.3, ease: DEC, stagger: 0.035, immediateRender: false }, 5.75);
+
+          // ===== 03 Start with the queue (7.5–14.3) =====
+          go("#cam", Q, 7.45, 0.85);
+          go("#rp", { blur: 7, opacity: 0.55 }, 7.45, 0.5, STD);
+          go("#hdr", { blur: 4, opacity: 0.6 }, 7.45, 0.5, STD);
+          wordsIn("#h3", 8.0);
+          go(".r-o", { blur: 1.6, opacity: 0.5 }, 10.9, 0.4, STD);
+          click(via(C(rowTR), Q), 11.45, 12.1);
+          go("#rowTbg", { opacity: 1 }, 12.13, 0.15, "none");
+          go("#rowTpill", { opacity: 1 }, 12.13, 0.15, "none");
+          leave(12.35);
+          wordsOut("#h3", 12.55);
+          go("#empty", { opacity: 0 }, 12.2, 0.2, "none");
+          go("#rp", { blur: 0, opacity: 1 }, 12.6, 0.4, STD);
+          go("#rec", { opacity: 1 }, 12.45, 0.3, "power1.out");
+          tl.fromTo(["#crumb", "#rhead", "#meta", "#tierBlock"], { y: 14 }, { y: 0, duration: 0.45, ease: DEC, stagger: 0.07, immediateRender: false }, 12.45);
+
+          // ===== 04 Read beyond the score (13.3–19.1) =====
+          go("#cam", RR, 13.3, 0.95);
+          go("#lp", { blur: 7, opacity: 0.45 }, 13.3, 0.5, STD);
+          go(".r-o", { blur: 0, opacity: 1 }, 13.3, 0.3, "none");
+          go("#tierBlock", { blur: 6, opacity: 0.4 }, 13.5, 0.5, STD);
+          go(".mo", { blur: 6, opacity: 0.3 }, 13.9, 0.45, STD);
+          go("#scrim", { opacity: 1 }, 14.1, 0.4, "power1.out");
+          go("#mfScore", { scale: 1.3 }, 14.35, 0.5);
+          wordsIn("#h4", 14.55);
+          go("#mfScore", { scale: 1 }, 16.4, 0.5, STD);
+          tl.fromTo(".mo", { opacity: 0.3, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.45, ease: DEC, stagger: 0.09, immediateRender: false }, 16.5);
+          S.set(".mo", Object.assign(S.get(".mo"), { opacity: 1, blur: 0 }));
+          wordsOut("#h4", 18.6);
+
+          // ===== 05 Assign a review tier (18.8–26.0) =====
+          go("#cam", TT, 18.8, 0.85);
+          go("#tierBlock", { blur: 0, opacity: 1 }, 18.8, 0.4, STD);
+          go("#meta", { blur: 5, opacity: 0.35 }, 18.8, 0.45, STD);
+          go(["#rhead", "#crumb"], { blur: 5, opacity: 0.35 }, 18.8, 0.45, STD);
+          wordsIn("#h5", 19.3);
+          go("#tip", { opacity: 1, y: 0, scale: 1 }, 19.55, 0.4, POP);
+          // the demo card is lifted out of the queue and dragged into Routine follow-up
+          gsap.set("#card", { left: (card0.x - rpR.x) / EP, top: (card0.y - rpR.y) / EP });
+          const dl = (p) => ({ x: (p.x - card0.x) / EP, y: (p.y - card0.y) / EP }); // canvas → card local offset
+          const grabP = via({ x: card0.x + 40 * EP, y: card0.y + cardH / 2 }, TT);
+          go("#card", { opacity: 1, scale: 1.03 }, 19.7, 0.25, DEC);
+          click(grabP, 19.55, 19.95);
+          const d3 = dl(s3);
+          go("#card", { x: d3.x, y: d3.y }, 20.05, 0.8, GIO);
+          moveTo(via({ x: s3.x + 40 * EP, y: s3.y + cardH / 2 }, TT), 20.07, 0.8, GIO);
+          go("#hl3", { opacity: 1 }, 20.4, 0.25, "none");
+          go("#card", { scale: 1 }, 20.85, 0.2, STD);
+          go("#hl3", { opacity: 0 }, 21.1, 0.3, "none");
+          go("#cnt0", { opacity: 0 }, 20.9, 0.15, "none"); go("#cnt1", { opacity: 1 }, 20.9, 0.15, "none");
+          leave(21.05);
+          go("#tip", { opacity: 0, y: 6 }, 23.1, 0.25, ACC);
+          // change it: More → Move to → Enhanced monitoring this week
+          const moreP = via({ x: s3.x + cardW - 19 * EP, y: s3.y + cardH / 2 }, TT);
+          click(moreP, 23.35, 23.95);
+          go("#fly", { opacity: 1, y: 0 }, 24.02, 0.22, DEC);
+          moveTo(via(fiEc, TT), 24.2, 0.35);
+          go("#fiHov", { opacity: 1 }, 24.48, 0.08, "none");
+          tl.fromTo("#cursor", { scale: 1 }, { scale: 0.92, duration: 0.12, ease: "power2.in", yoyo: true, repeat: 1, immediateRender: false }, 24.66);
+          go("#fly", { opacity: 0, y: -4 }, 24.8, 0.15, ACC);
+          const d2 = dl(s2);
+          go("#card", { x: d2.x, y: d2.y }, 24.85, 0.5, STD);
+          go("#hl2", { opacity: 1 }, 24.9, 0.2, "none"); go("#hl2", { opacity: 0 }, 25.4, 0.3, "none");
+          leave(25.0, 200, 260);
+          wordsOut("#h5", 25.55);
+
+          // ===== 06 Drafts save, confirm commits (25.8–31.0) =====
+          go("#cam", FF, 25.8, 0.85);
+          go(["#tierBlock", "#card"], { blur: 7, opacity: 0.35 }, 25.8, 0.45, STD);
+          go("#cnt1", { opacity: 0 }, 26.1, 0.15, "none"); go("#cnt2", { opacity: 1 }, 26.1, 0.15, "none");
+          go("#btnC", { backgroundColor: "#005FB8", color: "#FFFFFF" }, 26.15, 0.25, "none");
+          wordsIn("#h6", 26.3, 0.11);
+          go("#fs0", { opacity: 0 }, 26.55, 0.15, "none");
+          init("#fs1", { scale: 0.9 });
+          go("#fs1", { opacity: 1, scale: 1 }, 26.6, 0.35, POP);
+          click(via(C(btnR), FF), 27.55, 28.2);
+          go("#btnC", { scale: 0.96 }, 28.2, 0.1, "power2.in"); go("#btnC", { scale: 1 }, 28.3, 0.12, "power2.out");
+          leave(28.35, 120, 200);
+          go("#smoke", { opacity: 1 }, 28.35, 0.25, "none");
+          go("#dlg", { opacity: 1, scale: 1 }, 28.38, 0.3, DEC);
+          go("#cam", DD, 28.35, 0.6);
+          click(via(C(dlgOkR), DD), 28.8, 29.35, { from: { x: 1500, y: 1140 } });
+          go("#dlg", { opacity: 0, scale: 0.98 }, 29.5, 0.18, ACC);
+          go("#smoke", { opacity: 0 }, 29.5, 0.2, "none");
+          leave(29.55, 160, 220);
+          go("#cam", FF, 29.5, 0.6);
+          go("#fs1", { opacity: 0 }, 29.75, 0.15, "none"); go("#fs2", { opacity: 1 }, 29.8, 0.2, "none");
+          go("#btnC", { opacity: 0 }, 29.75, 0.15, "none");
+          init("#onrec", { scale: 0.9 });
+          go("#onrec", { opacity: 1, scale: 1 }, 29.8, 0.35, POP);
+          wordsOut("#h6", 30.55);
+          go("#scrim", { opacity: 0 }, 30.6, 0.3, "none");
+
+          // ===== 07 The case file (30.6–34.9) =====
+          go("#cam", FULL, 30.6, 0.7);
+          go(["#tierBlock", "#card", "#meta", "#rhead", "#crumb", "#lp", "#hdr"], { blur: 0, opacity: 1 }, 30.6, 0.45, STD);
+          click(C(btnCFR), 31.0, 31.5);
+          go("#drawer", { opacity: 1, x: 0 }, 31.62, 0.42, DEC);
+          tl.fromTo("#dwRows .dw-row", { opacity: 0, x: 18 }, { opacity: 1, x: 0, duration: 0.32, ease: DEC, stagger: 0.06, immediateRender: false }, 31.85);
+          leave(31.7, 120, 260);
+          go("#cam", CF, 31.85, 0.75);
+          go(["#lp", "#rp", "#foot"], { blur: 5, opacity: 0.5 }, 31.9, 0.45, STD);
+          wordsIn("#h7", 32.15);
+          wordsOut("#h7", 34.4);
+
+          // ===== 08 Minimise anytime (34.6–41.2) =====
+          go("#cam", FULL, 34.6, 0.7);
+          go(["#lp", "#rp", "#foot"], { blur: 0, opacity: 1 }, 34.6, 0.45, STD);
+          click(C(capMinR), 35.2, 35.85);
+          const winOrigin = `${((C(tileR).x - winR.x) / winR.w) * 100}% ${((C(tileR).y - winR.y) / winR.h) * 100}%`;
+          // minimise toward the taskbar icon (origin switched just before; the open animation used the centre)
+          tl.fromTo("#win", { transformOrigin: "50% 50%" }, { transformOrigin: winOrigin, duration: 0.01, ease: "none", immediateRender: false }, 35.0);
+          go("#win", { scale: 0.12, opacity: 0 }, 35.92, 0.34, ACC);
+          go("#ind", { width: 6, marginLeft: -3, backgroundColor: "#8A8A8A" }, 36.1, 0.2, STD);
+          leave(36.0, 60, 300);
+          wordsIn("#h8", 36.3);
+          wordsOut("#h8", 37.7);
+          click(C(tileR), 37.25, 37.9);
+          go("#win", { scale: 1, opacity: 1 }, 38.0, 0.36, DEC);
+          go("#ind", { width: 16, marginLeft: -8, backgroundColor: "#005FB8" }, 38.02, 0.2, STD);
+          leave(38.15, 140, 200);
+
+          // ===== 09 Let's begin (41.2–47) =====
+          go("#win", { scale: 0.12, opacity: 0 }, 41.2, 0.34, ACC);
+          go("#ind", { width: 6, marginLeft: -3, backgroundColor: "#8A8A8A" }, 41.35, 0.2, STD);
+          // the taskbar icon lifts off the desktop and becomes the way in
+          init("#hb", { x: tileR.x, y: tileR.y, width: tileR.w, height: tileR.h, borderRadius: 9 });
+          go("#hb", { opacity: 1 }, 41.58, 0.01, "none");
+          go("#tbApp", { opacity: 0 }, 41.6, 0.01, "none");
+          go("#desk", { blur: 18, opacity: 0 }, 41.62, 0.5, STD);
+          go("#hb", { x: 960 - 48, y: 616 - 48, width: 96, height: 96, borderRadius: 26 }, 41.75, 0.7, GIO);
+          go("#hb", { x: 960 - 196, width: 392, borderRadius: 48 }, 42.45, 0.5, STD);
+          tl.fromTo("#hbG", { opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power1.in", immediateRender: false }, 42.45);
+          go("#hbL", { opacity: 1 }, 42.75, 0.25, "power1.out");
+          go("#s9", { opacity: 1 }, 42.6, 0.01, "none");
+          init("#e-title", { y: 26, blur: 20 });
+          go("#e-title", { opacity: 1, y: 0, blur: 0 }, 42.7, 0.5);
+          wordsIn("#e-plan", 43.15, 0.09);
+          init("#s9", { scale: 1, transformOrigin: "50% 50%" });
+          go("#s9", { scale: 1.03 }, 43.3, 3.7, "sine.inOut");
+
+          window.__timelines["main"] = tl;
+        }
+
+        document.fonts.ready.then(build);
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+# dependencies and builds
+node_modules/
+app/dist/
+
+# HyperFrames working files (regenerable; the final film lives in walkthrough/)
+behind-the-order-walkthrough/renders/
+behind-the-order-walkthrough/snapshots/
+behind-the-order-walkthrough/.thumbnails/
+behind-the-order-walkthrough/.hyperframes/
+
+# OS / editor
+.DS_Store
+*.log
