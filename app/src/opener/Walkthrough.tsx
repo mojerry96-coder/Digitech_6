@@ -7,7 +7,7 @@ import { A } from "../asset";
 export function Walkthrough({ volume, onDone }: { volume: number; onDone: () => void }) {
   const v = useRef<HTMLVideoElement>(null);
   const [t, setT] = useState(0);
-  const [cc, setCc] = useState(false);
+  const [cc, setCc] = useState(true); // on by default: the walkthrough sets up the story, so every word should be readable
   const [blocked, setBlocked] = useState(false);
   const [ended, setEnded] = useState(false);
   useEffect(() => {

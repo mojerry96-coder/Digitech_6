@@ -1,78 +1,133 @@
 // Walkthrough captions (from walkthrough/captions.srt, timed to the measured voiceover)
 export const CUES: { s: number; e: number; t: string }[] = [
 {
-"s": 0.35,
-"e": 1.36,
+"s": 0.4,
+"e": 1.64,
 "t": "Behind the Order."
 },
 {
-"s": 1.65,
-"e": 4.15,
-"t": "A case review in the Compliance Sandbox."
+"s": 2.45,
+"e": 9.45,
+"t": "In this simulation, you are a public health law and ethics analyst at a county health department."
 },
 {
-"s": 4.3,
-"e": 6.93,
-"t": "Open the Compliance Sandbox from the desktop."
+"s": 10.0,
+"e": 17.63,
+"t": "A computer system called ComplianceWatch predicts which patients might stop following their treatment orders."
 },
 {
-"s": 7.7,
-"e": 11.15,
-"t": "Ten flagged cases, ranked by a model score."
+"s": 18.41,
+"e": 27.54,
+"t": "It has flagged Mr Tunde Balogun, who is being treated for tuberculosis, as eighty-eight percent high risk."
 },
 {
-"s": 11.59,
-"e": 13.77,
-"t": "Select one to open its record."
+"s": 28.3,
+"e": 30.71,
+"t": "A hearing is five days away."
 },
 {
-"s": 14.4,
-"e": 15.92,
-"t": "The score is one input."
+"s": 31.37,
+"e": 37.44,
+"t": "Your recommendation could mean more support for him, or a court petition to detain him."
 },
 {
-"s": 16.54,
-"e": 18.53,
-"t": "Read every field before you decide."
-},
-{
-"s": 19.2,
-"e": 22.88,
-"t": "Drag a case into a tier, or select it and choose."
-},
-{
-"s": 23.55,
-"e": 25.58,
-"t": "You can change it until you confirm."
-},
-{
-"s": 26.1,
-"e": 28.07,
-"t": "Your work saves as a draft."
-},
-{
-"s": 28.64,
-"e": 30.62,
-"t": "Confirming commits it to the record."
-},
-{
-"s": 31.5,
-"e": 34.23,
-"t": "Everything you record is kept in the case file."
-},
-{
-"s": 35.0,
-"e": 37.64,
-"t": "Minimise or close whenever you need to."
-},
-{
-"s": 38.24,
-"e": 40.43,
-"t": "Your work stays where you left it."
+"s": 38.34,
+"e": 41.25,
+"t": "It is a decision about a person's freedom."
 },
 {
 "s": 41.9,
-"e": 43.95,
-"t": "Take your time. Let's begin."
+"e": 45.03,
+"t": "But a risk score is not proof."
+},
+{
+"s": 45.68,
+"e": 48.68,
+"t": "It cannot tell you why something happened."
+},
+{
+"s": 49.39,
+"e": 56.62,
+"t": "Your job is to look behind the number, check the evidence, and decide what it really shows."
+},
+{
+"s": 57.6,
+"e": 62.71,
+"t": "You will do this work in the Compliance Sandbox, on this computer."
+},
+{
+"s": 63.6,
+"e": 66.45,
+"t": "Start with the queue of flagged cases."
+},
+{
+"s": 67.11,
+"e": 69.79,
+"t": "Select a case to open its record."
+},
+{
+"s": 70.9,
+"e": 73.58,
+"t": "Read the whole record, not just the score."
+},
+{
+"s": 74.24,
+"e": 76.33,
+"t": "Every detail can change the picture."
+},
+{
+"s": 77.3,
+"e": 79.91,
+"t": "Each task asks for a judgement."
+},
+{
+"s": 80.52,
+"e": 86.78,
+"t": "You will sort evidence, link records, weigh trade-offs and make a recommendation."
+},
+{
+"s": 87.59,
+"e": 91.74,
+"t": "Drag items into place, or select them and choose."
+},
+{
+"s": 93.3,
+"e": 95.57,
+"t": "Your work saves as a draft."
+},
+{
+"s": 96.48,
+"e": 99.72,
+"t": "When you confirm, the decision is locked."
+},
+{
+"s": 100.6,
+"e": 103.13,
+"t": "Everything you record goes into the case file."
+},
+{
+"s": 103.96,
+"e": 111.21,
+"t": "Other people may rely on it later, so write down why you decided, not just what."
+},
+{
+"s": 112.2,
+"e": 115.37,
+"t": "You can minimise or close the app at any time."
+},
+{
+"s": 116.0,
+"e": 117.44,
+"t": "Your work is saved."
+},
+{
+"s": 119.1,
+"e": 121.28,
+"t": "There is no single right score."
+},
+{
+"s": 121.98,
+"e": 125.99,
+"t": "Think it through, explain your reasoning, and let's begin."
 }
 ];

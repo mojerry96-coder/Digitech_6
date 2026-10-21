@@ -173,6 +173,14 @@
       #hbL { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 14px; font-size: 38px; font-weight: 800; white-space: nowrap; }
       #hbL .ic { width: 34px; height: 34px; }
 
+      /* story beats */
+      .card-s { padding: 30px 38px; border-radius: 26px; background: #fff; border: 2px solid rgba(9, 49, 79, 0.10); box-shadow: 0 30px 80px rgba(9, 49, 79, 0.14); }
+      .tile-s { width: 56px; height: 56px; border-radius: 12px; background: var(--accent); color: #fff; display: grid; place-items: center; flex: none; }
+      .pill-s { display: inline-flex; align-items: center; gap: 12px; height: 96px; padding: 0 40px; border-radius: 999px; background: #fff; border: 2px solid rgba(9, 49, 79, 0.16); font-size: 37px; font-weight: 700; color: var(--ink); box-shadow: 0 14px 40px rgba(9, 49, 79, 0.08); }
+      .q-s { display: inline-flex; align-items: center; gap: 14px; height: 100px; padding: 0 34px; border-radius: 22px; background: #fff; border: 2px dashed rgba(0, 95, 184, 0.45); font-size: 36px; font-weight: 700; color: var(--ink); }
+      .q-s b { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: rgba(0, 95, 184, 0.1); color: var(--accent); font-size: 28px; }
+      .chip-s { display: inline-flex; align-items: center; gap: 14px; height: 84px; padding: 0 32px; border-radius: 999px; background: #fff; border: 2px solid rgba(0, 95, 184, 0.25); box-shadow: 0 18px 50px rgba(9, 49, 79, 0.14); font-size: 32px; font-weight: 700; color: var(--ink); }
+      .chip-s .ic { width: 34px; height: 34px; color: var(--accent); }
       #cursor { position: absolute; left: 0; top: 0; width: 76px; height: 90px; filter: drop-shadow(0 6px 10px rgba(7, 17, 39, 0.25)); transform-origin: 34% 6%; }
       .ripple { position: absolute; left: 0; top: 0; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%; border: 4px solid rgba(0, 95, 184, 0.55); }
     </style>
@@ -184,59 +192,68 @@
           <path data-hf-id="hf-0bgs" d="M11 2.5c1.4 0 2.5 1.1 2.5 2.5v9.2l1-.1c.4-1.1 1.4-1.8 2.5-1.8 1.3 0 2.3.9 2.5 2.1.5-.3 1-.4 1.6-.4 1.3 0 2.4 1 2.5 2.3.4-.2.9-.3 1.4-.3 1.4 0 2.5 1.1 2.5 2.5v7c0 5-4 9-9 9h-2.6c-2.7 0-5.2-1.3-6.8-3.4l-5.6-7.6c-.8-1.1-.6-2.7.5-3.5 1-.8 2.5-.7 3.4.3l1.6 1.8V5c0-1.4 1.1-2.5 2.5-2.5z" fill="#fff" stroke="#0A2437" stroke-width="2" stroke-linejoin="round" />
         </symbol>
 <!--ICONS:START-->
-<symbol data-hf-id="hf-vgt5" id="i-arrow_right_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-kqez" d="M10.84 3.13a.5.5 0 0 0-.68.74l6.17 5.63H2.5a.5.5 0 0 0 0 1h13.83l-6.17 5.63a.5.5 0 0 0 .68.74l6.91-6.32a.75.75 0 0 0 0-1.1z" /></symbol>
-<symbol data-hf-id="hf-4mrv" id="i-arrow_sort_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-j1ec" d="M2.35 7.35 5 4.71V16.5a.5.5 0 0 0 1 0V4.7l2.65 2.65a.5.5 0 0 0 .7-.7l-3.49-3.5A.5.5 0 0 0 5.5 3a.5.5 0 0 0-.39.18L1.65 6.65a.5.5 0 1 0 .7.7m15.3 5.3L15 15.29V3.5a.5.5 0 0 0-1 0v11.8l-2.65-2.65a.5.5 0 0 0-.7.7l3.49 3.5a.5.5 0 0 0 .36.15.5.5 0 0 0 .39-.18l3.46-3.47a.5.5 0 1 0-.7-.7" /></symbol>
-<symbol data-hf-id="hf-wkgq" id="i-battery_10_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-ycfx" d="M16 5a3 3 0 0 1 3 3 1 1 0 0 1 1 1v2a1 1 0 0 1-1 1 3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3zM3 6a2 2 0 0 0-2 2v4c0 1.1.9 2 2 2h13a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm13 1a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z" /></symbol>
-<symbol data-hf-id="hf-invx" id="i-checkmark_16_regular" viewBox="0 0 16 16"><path data-hf-id="hf-ncp1" d="M13.86 3.66a.5.5 0 0 1-.02.7l-7.93 7.48a.6.6 0 0 1-.84-.02L2.4 9.1a.5.5 0 0 1 .72-.7l2.4 2.44 7.65-7.2a.5.5 0 0 1 .7.02" /></symbol>
-<symbol data-hf-id="hf-nk97" id="i-checkmark_circle_20_filled" viewBox="0 0 20 20"><path data-hf-id="hf-bibh" d="M10 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16m3.36 5.65a.5.5 0 0 0-.64-.06l-.07.06L9 11.3 7.35 9.65l-.07-.06a.5.5 0 0 0-.7.7l.07.07 2 2 .07.06c.17.11.4.11.56 0l.07-.06 4-4 .07-.08a.5.5 0 0 0-.06-.63" /></symbol>
-<symbol data-hf-id="hf-dupy" id="i-chevron_right_12_regular" viewBox="0 0 12 12"><path data-hf-id="hf-4vlq" d="M4.65 2.15a.5.5 0 0 0 0 .7L7.79 6 4.65 9.15a.5.5 0 1 0 .7.7l3.5-3.5a.5.5 0 0 0 0-.7l-3.5-3.5a.5.5 0 0 0-.7 0" /></symbol>
-<symbol data-hf-id="hf-9i1y" id="i-database_20_filled" viewBox="0 0 20 20"><path data-hf-id="hf-c02r" d="M10 8c3.31 0 6-1.34 6-3s-2.69-3-6-3-6 1.34-6 3 2.69 3 6 3m4.69.02q.72-.36 1.31-.9V15c0 1.66-2.69 3-6 3s-6-1.34-6-3V7.12q.59.54 1.31.9C6.56 8.64 8.22 9 10 9s3.44-.36 4.69-.98" /></symbol>
-<symbol data-hf-id="hf-uzpw" id="i-database_24_regular" viewBox="0 0 24 24"><path data-hf-id="hf-q9fu" d="M4 6c0-.7.32-1.3.77-1.78a6 6 0 0 1 1.8-1.2A14 14 0 0 1 12 2c2.08 0 4 .38 5.43 1.02q1.1.48 1.8 1.2c.45.49.77 1.09.77 1.78v12c0 .7-.32 1.3-.77 1.78q-.7.72-1.8 1.2A14 14 0 0 1 12 22c-2.08 0-4-.38-5.43-1.02a6 6 0 0 1-1.8-1.2A2.6 2.6 0 0 1 4 18zm1.5 0c0 .2.09.46.37.75q.4.46 1.31.86c1.2.54 2.9.89 4.82.89s3.62-.35 4.82-.89q.9-.4 1.31-.86c.28-.3.37-.54.37-.75s-.09-.46-.37-.75q-.4-.46-1.31-.86c-1.2-.54-2.9-.89-4.82-.89s-3.62.35-4.82.89q-.9.4-1.31.86c-.28.3-.37.54-.37.75m13 2.4a7 7 0 0 1-1.07.58A14 14 0 0 1 12 10c-2.08 0-4-.38-5.43-1.02A7 7 0 0 1 5.5 8.4V18c0 .2.09.46.37.75q.4.46 1.31.86c1.2.54 2.9.89 4.82.89s3.62-.35 4.82-.89q.9-.4 1.31-.86c.28-.3.37-.54.37-.75z" /></symbol>
-<symbol data-hf-id="hf-yhv6" id="i-delete_24_regular" viewBox="0 0 24 24"><path data-hf-id="hf-exg9" d="M10 5h4a2 2 0 1 0-4 0M8.5 5a3.5 3.5 0 1 1 7 0h5.75a.75.75 0 0 1 0 1.5h-1.32l-1.17 12.11A3.75 3.75 0 0 1 15.03 22H8.97a3.75 3.75 0 0 1-3.73-3.39L4.07 6.5H2.75a.75.75 0 0 1 0-1.5zm2 4.75a.75.75 0 0 0-1.5 0v7.5a.75.75 0 0 0 1.5 0zM14.25 9c.41 0 .75.34.75.75v7.5a.75.75 0 0 1-1.5 0v-7.5c0-.41.34-.75.75-.75m-7.52 9.47a2.25 2.25 0 0 0 2.24 2.03h6.06c1.15 0 2.12-.88 2.24-2.03L18.42 6.5H5.58z" /></symbol>
-<symbol data-hf-id="hf-59hc" id="i-dismiss_16_regular" viewBox="0 0 16 16"><path data-hf-id="hf-cdbt" d="m2.59 2.72.06-.07a.5.5 0 0 1 .63-.06l.07.06L8 7.29l4.65-4.64a.5.5 0 0 1 .7.7L8.71 8l4.64 4.65c.18.17.2.44.06.63l-.06.07a.5.5 0 0 1-.63.06l-.07-.06L8 8.71l-4.65 4.64a.5.5 0 0 1-.7-.7L7.29 8 2.65 3.35a.5.5 0 0 1-.06-.63l.06-.07z" /></symbol>
-<symbol data-hf-id="hf-xufp" id="i-dismiss_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-qcp6" d="m4.09 4.22.06-.07a.5.5 0 0 1 .63-.06l.07.06L10 9.29l5.15-5.14a.5.5 0 0 1 .63-.06l.07.06c.18.17.2.44.06.63l-.06.07L10.71 10l5.14 5.15c.18.17.2.44.06.63l-.06.07a.5.5 0 0 1-.63.06l-.07-.06L10 10.71l-5.15 5.14a.5.5 0 0 1-.63.06l-.07-.06a.5.5 0 0 1-.06-.63l.06-.07L9.29 10 4.15 4.85a.5.5 0 0 1-.06-.63l.06-.07z" /></symbol>
-<symbol data-hf-id="hf-waro" id="i-document_text_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-zypq" d="M6.5 10a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1zM4 4c0-1.1.9-2 2-2h4.59q.62.01 1.06.44l3.91 3.91c.28.28.44.67.44 1.06V16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8h-3.5A1.5 1.5 0 0 1 10 6.5V3zm5.5 4h3.3L11 3.2v3.3c0 .28.22.5.5.5" /></symbol>
-<symbol data-hf-id="hf-7g71" id="i-folder_24_filled" viewBox="0 0 24 24"><path data-hf-id="hf-ps2u" d="M2 8V6.25C2 4.45 3.46 3 5.25 3h2.88c.6 0 1.17.24 1.59.66l1.53 1.53-2.6 2.59a.8.8 0 0 1-.52.22zm0 1.5v8.25C2 19.55 3.46 21 5.25 21h13.5c1.8 0 3.25-1.46 3.25-3.25v-9c0-1.8-1.46-3.25-3.25-3.25h-5.69L9.72 8.84c-.42.42-1 .66-1.6.66z" /></symbol>
-<symbol data-hf-id="hf-swox" id="i-folder_24_regular" viewBox="0 0 24 24"><path data-hf-id="hf-sq00" d="M3.5 6.25V8h4.63q.31 0 .53-.22l1.53-1.53-1.53-1.53a.8.8 0 0 0-.53-.22H5.25c-.97 0-1.75.78-1.75 1.75m-1.5 0C2 4.45 3.46 3 5.25 3h2.88c.6 0 1.17.24 1.59.66l1.84 1.84h7.19c1.8 0 3.25 1.46 3.25 3.25v9c0 1.8-1.46 3.25-3.25 3.25H5.25A3.25 3.25 0 0 1 2 17.75zM3.5 9.5v8.25c0 .97.78 1.75 1.75 1.75h13.5c.97 0 1.75-.78 1.75-1.75v-9c0-.97-.78-1.75-1.75-1.75h-7.19L9.72 8.84c-.42.42-1 .66-1.6.66z" /></symbol>
-<symbol data-hf-id="hf-gokd" id="i-grid_24_regular" viewBox="0 0 24 24"><path data-hf-id="hf-6u5h" d="M8.75 13C9.99 13 11 14 11 15.25v3.5C11 19.99 10 21 8.75 21h-3.5C4.01 21 3 20 3 18.75v-3.5C3 14.01 4 13 5.25 13zm10 0c1.24 0 2.25 1 2.25 2.25v3.5c0 1.24-1 2.25-2.25 2.25h-3.5C14.01 21 13 20 13 18.75v-3.5c0-1.24 1-2.25 2.25-2.25zm-10 1.5h-3.5a.75.75 0 0 0-.75.75v3.5c0 .41.34.75.75.75h3.5c.41 0 .75-.34.75-.75v-3.5a.75.75 0 0 0-.75-.75m10 0h-3.5a.75.75 0 0 0-.75.75v3.5c0 .41.34.75.75.75h3.5c.41 0 .75-.34.75-.75v-3.5a.75.75 0 0 0-.75-.75M8.75 3C9.99 3 11 4 11 5.25v3.5C11 9.99 10 11 8.75 11h-3.5C4.01 11 3 10 3 8.75v-3.5C3 4.01 4 3 5.25 3zm10 0C19.99 3 21 4 21 5.25v3.5C21 9.99 20 11 18.75 11h-3.5C14.01 11 13 10 13 8.75v-3.5C13 4.01 14 3 15.25 3zm-10 1.5h-3.5a.75.75 0 0 0-.75.75v3.5c0 .41.34.75.75.75h3.5c.41 0 .75-.34.75-.75v-3.5a.75.75 0 0 0-.75-.75m10 0h-3.5a.75.75 0 0 0-.75.75v3.5c0 .41.34.75.75.75h3.5c.41 0 .75-.34.75-.75v-3.5a.75.75 0 0 0-.75-.75" /></symbol>
-<symbol data-hf-id="hf-r549" id="i-info_20_filled" viewBox="0 0 20 20"><path data-hf-id="hf-ncim" d="M18 10a8 8 0 1 0-16 0 8 8 0 0 0 16 0M9.5 8.91a.5.5 0 0 1 1 0v4.69a.5.5 0 0 1-1 0V8.9m-.25-2.16a.75.75 0 1 1 1.5 0 .75.75 0 0 1-1.5 0" /></symbol>
-<symbol data-hf-id="hf-3s3y" id="i-lock_closed_16_filled" viewBox="0 0 16 16"><path data-hf-id="hf-cgyc" d="M8 1a3 3 0 0 1 3 3v2a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8c0-1.1.9-2 2-2V4a3 3 0 0 1 3-3m0 8.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2M8 2a2 2 0 0 0-2 2v2h4V4a2 2 0 0 0-2-2" /></symbol>
-<symbol data-hf-id="hf-4o2c" id="i-lock_closed_16_regular" viewBox="0 0 16 16"><path data-hf-id="hf-9pb3" d="M8 1a3 3 0 0 1 3 3v2a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8c0-1.1.9-2 2-2V4a3 3 0 0 1 3-3M5 7a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm3 2.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2M8 2a2 2 0 0 0-2 2v2h4V4a2 2 0 0 0-2-2" /></symbol>
-<symbol data-hf-id="hf-ivr5" id="i-lock_closed_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-j0rc" d="M10 1a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v6a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 4 15.5v-6c0-1.2.86-2.22 2-2.45V5a4 4 0 0 1 4-4M6.5 8C5.67 8 5 8.67 5 9.5v6c0 .83.67 1.5 1.5 1.5h7c.83 0 1.5-.67 1.5-1.5v-6c0-.83-.67-1.5-1.5-1.5zm3.5 3.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2M10 2a3 3 0 0 0-3 3v2h6V5a3 3 0 0 0-3-3" /></symbol>
-<symbol data-hf-id="hf-f53r" id="i-more_horizontal_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-f6ai" d="M6.25 10a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0m5 0a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0M15 11.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5" /></symbol>
-<symbol data-hf-id="hf-eujg" id="i-people_community_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-gje3" d="M10 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4M7 5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m-1.95 5q-.05.24-.05.5v.54l-2.63.71a.5.5 0 0 0-.35.61l.64 2.42a3 3 0 0 0 3.32 2.2q.35.45.79.83l-.17.05a4 4 0 0 1-4.9-2.82l-.65-2.42a1.5 1.5 0 0 1 1.06-1.84zM15 11.04v-.54q0-.26-.05-.5l2.94.78a1.5 1.5 0 0 1 1.06 1.84l-.64 2.42a4 4 0 0 1-5.07 2.77q.44-.37.78-.84a3 3 0 0 0 3.32-2.2l.65-2.4a.5.5 0 0 0-.36-.62zm0-4.54a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0M16.5 4a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5m-13 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M1 6.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0M7.5 9C6.67 9 6 9.67 6 10.5V14a4 4 0 0 0 8 0v-3.5c0-.83-.67-1.5-1.5-1.5zM7 10.5c0-.28.22-.5.5-.5h5c.28 0 .5.22.5.5V14a3 3 0 1 1-6 0z" /></symbol>
-<symbol data-hf-id="hf-1h4g" id="i-question_circle_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-dlxg" d="M10 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16m0 1a7 7 0 1 0 0 14 7 7 0 0 0 0-14m0 10.5a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5m0-8a2.5 2.5 0 0 1 1.65 4.38l-.15.12-.22.17-.09.07-.16.15c-.33.36-.53.85-.53 1.61a.5.5 0 0 1-1 0 3.2 3.2 0 0 1 1.16-2.62l.25-.19.12-.1A1.5 1.5 0 0 0 10 6.5c-.83 0-1.5.67-1.5 1.5a.5.5 0 0 1-1 0A2.5 2.5 0 0 1 10 5.5" /></symbol>
-<symbol data-hf-id="hf-a72f" id="i-re_order_dots_vertical_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-1jnf" d="M7 5a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2m1 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m5-11a1 1 0 1 0 0-2 1 1 0 0 0 0 2m1 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-1 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2" /></symbol>
-<symbol data-hf-id="hf-bw9l" id="i-search_24_regular" viewBox="0 0 24 24"><path data-hf-id="hf-wwal" d="M16.1 17.16a8 8 0 1 1 1.06-1.06l4.62 4.62a.75.75 0 1 1-1.06 1.06zM17.5 11a6.5 6.5 0 1 0-13 0 6.5 6.5 0 0 0 13 0" /></symbol>
-<symbol data-hf-id="hf-b7o9" id="i-speaker_2_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-6f4o" d="M12 3a1 1 0 0 0-1.68-.73l-3.88 3.6A.5.5 0 0 1 6.1 6H3.5C2.67 6 2 6.67 2 7.5v5c0 .83.67 1.5 1.5 1.5h2.6a.5.5 0 0 1 .34.13l3.88 3.6a1 1 0 0 0 1.68-.74zM7.12 6.6 11 3v14l-3.88-3.6A1.5 1.5 0 0 0 6.1 13H3.5a.5.5 0 0 1-.5-.5v-5c0-.28.22-.5.5-.5h2.6c.38 0 .75-.14 1.02-.4m8.14-1.97a.5.5 0 0 1 .7.04 8 8 0 0 1 0 10.66.5.5 0 0 1-.74-.66 7 7 0 0 0 0-9.34.5.5 0 0 1 .04-.7m-1.18 8.3a.5.5 0 0 1-.18-.68 4.5 4.5 0 0 0 0-4.5.5.5 0 1 1 .86-.5 5.5 5.5 0 0 1 0 5.5.5.5 0 0 1-.68.18" /></symbol>
-<symbol data-hf-id="hf-3jm3" id="i-square_16_regular" viewBox="0 0 16 16"><path data-hf-id="hf-2sap" d="M2 4.5A2.5 2.5 0 0 1 4.5 2h7A2.5 2.5 0 0 1 14 4.5v7a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 11.5zM4.5 3C3.67 3 3 3.67 3 4.5v7c0 .83.67 1.5 1.5 1.5h7c.83 0 1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5z" /></symbol>
-<symbol data-hf-id="hf-x5bk" id="i-square_multiple_16_regular" viewBox="0 0 16 16"><path data-hf-id="hf-9o5s" d="M5.08 4c.21-.58.77-1 1.42-1H10a3 3 0 0 1 3 3v3.5c0 .65-.42 1.2-1 1.41V6a2 2 0 0 0-2-2zM4.5 5h5c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5h-5A1.5 1.5 0 0 1 3 11.5v-5C3 5.67 3.67 5 4.5 5m0 1a.5.5 0 0 0-.5.5v5c0 .28.22.5.5.5h5a.5.5 0 0 0 .5-.5v-5a.5.5 0 0 0-.5-.5z" /></symbol>
-<symbol data-hf-id="hf-tjco" id="i-subtract_16_regular" viewBox="0 0 16 16"><path data-hf-id="hf-r702" d="M3 8c0-.28.22-.5.5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8" /></symbol>
-<symbol data-hf-id="hf-4z50" id="i-text_bullet_list_square_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-nx9b" d="M6.75 8a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5m.75 2.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0M6.75 14a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5M9 7.5c0-.28.22-.5.5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zM9 13.5c0-.28.22-.5.5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M5.75 3h8.5A2.75 2.75 0 0 1 17 5.75v8.5A2.75 2.75 0 0 1 14.25 17h-8.5A2.75 2.75 0 0 1 3 14.25v-8.5A2.75 2.75 0 0 1 5.75 3M4 5.75v8.5c0 .97.78 1.75 1.75 1.75h8.5c.97 0 1.75-.78 1.75-1.75v-8.5C16 4.78 15.22 4 14.25 4h-8.5C4.78 4 4 4.78 4 5.75" /></symbol>
-<symbol data-hf-id="hf-7ynz" id="i-tray_item_add_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-chvq" d="M11 3a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1zm4 0h-3v2h3zm-1.5 4c.28 0 .5.22.5.5v5.8l1.15-1.15a.5.5 0 0 1 .7.7l-2 2a.5.5 0 0 1-.7 0l-2-2a.5.5 0 0 1 .7-.7L13 13.29V7.5c0-.28.22-.5.5-.5M4 12a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1zm4 0H5v2h3zm-5.5 1c.28 0 .5.22.5.5V15a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1.5a.5.5 0 0 1 1 0V15a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-1.5c0-.28.22-.5.5-.5" /></symbol>
-<symbol data-hf-id="hf-fgw8" id="i-wifi_1_20_regular" viewBox="0 0 20 20"><path data-hf-id="hf-pexp" d="M16.83 7.38q.62.63 1.14 1.37a.5.5 0 0 1-.83.57 8.61 8.61 0 0 0-14.2 0 .5.5 0 0 1-.82-.58 9.61 9.61 0 0 1 14.71-1.36M14.6 9.36q.71.72 1.19 1.65a.5.5 0 0 1-.89.46q-.4-.8-1.01-1.4a5.45 5.45 0 0 0-8.72 1.38.5.5 0 1 1-.89-.45q.45-.9 1.2-1.64a6.45 6.45 0 0 1 9.12 0m-1.71 2.5q.53.53.85 1.25a.5.5 0 0 1-.92.4 3.03 3.03 0 0 0-5.56-.01.5.5 0 1 1-.92-.4q.3-.72.84-1.25a4.03 4.03 0 0 1 5.7 0m-1.93 1.93a1.3 1.3 0 1 1-1.83 1.83 1.3 1.3 0 0 1 1.83-1.83" /></symbol>
+<symbol id="i-alert_20_regular" viewBox="0 0 20 20"><path d="M10 2a5.9 5.9 0 0 1 5.98 5.36l.02.22v3.82l.92 2.22.06.17.01.08.01.13a1 1 0 0 1-.75.97l-.11.02L16 15h-3.5v.17a2.5 2.5 0 0 1-5 0V15H4l-.26-.03-.13-.04a1 1 0 0 1-.6-1.05l.02-.13.05-.13L4 11.4V7.57A5.9 5.9 0 0 1 10 2m1.5 13h-3v.15a1.5 1.5 0 0 0 1.36 1.34l.14.01c.78 0 1.42-.6 1.5-1.36zM10 3a4.9 4.9 0 0 0-4.98 4.38L5 7.6v3.9l-.04.2L4 14h12l-.96-2.3-.04-.2V7.61A4.9 4.9 0 0 0 10 3"/></symbol>
+<symbol id="i-arrow_right_20_regular" viewBox="0 0 20 20"><path d="M10.84 3.13a.5.5 0 0 0-.68.74l6.17 5.63H2.5a.5.5 0 0 0 0 1h13.83l-6.17 5.63a.5.5 0 0 0 .68.74l6.91-6.32a.75.75 0 0 0 0-1.1z"/></symbol>
+<symbol id="i-arrow_sort_20_regular" viewBox="0 0 20 20"><path d="M2.35 7.35 5 4.71V16.5a.5.5 0 0 0 1 0V4.7l2.65 2.65a.5.5 0 0 0 .7-.7l-3.49-3.5A.5.5 0 0 0 5.5 3a.5.5 0 0 0-.39.18L1.65 6.65a.5.5 0 1 0 .7.7m15.3 5.3L15 15.29V3.5a.5.5 0 0 0-1 0v11.8l-2.65-2.65a.5.5 0 0 0-.7.7l3.49 3.5a.5.5 0 0 0 .36.15.5.5 0 0 0 .39-.18l3.46-3.47a.5.5 0 1 0-.7-.7"/></symbol>
+<symbol id="i-battery_10_20_regular" viewBox="0 0 20 20"><path d="M16 5a3 3 0 0 1 3 3 1 1 0 0 1 1 1v2a1 1 0 0 1-1 1 3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3zM3 6a2 2 0 0 0-2 2v4c0 1.1.9 2 2 2h13a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm13 1a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/></symbol>
+<symbol id="i-calendar_ltr_20_regular" viewBox="0 0 20 20"><path d="M7 11a1 1 0 1 0 0-2 1 1 0 0 0 0 2m1 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0m2-2a1 1 0 1 0 0-2 1 1 0 0 0 0 2m1 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0m2-2a1 1 0 1 0 0-2 1 1 0 0 0 0 2m4-5.5A2.5 2.5 0 0 0 14.5 3h-9A2.5 2.5 0 0 0 3 5.5v9A2.5 2.5 0 0 0 5.5 17h9a2.5 2.5 0 0 0 2.5-2.5zM4 7h12v7.5c0 .83-.67 1.5-1.5 1.5h-9A1.5 1.5 0 0 1 4 14.5zm1.5-3h9c.83 0 1.5.67 1.5 1.5V6H4v-.5C4 4.67 4.67 4 5.5 4"/></symbol>
+<symbol id="i-checkmark_16_regular" viewBox="0 0 16 16"><path d="M13.86 3.66a.5.5 0 0 1-.02.7l-7.93 7.48a.6.6 0 0 1-.84-.02L2.4 9.1a.5.5 0 0 1 .72-.7l2.4 2.44 7.65-7.2a.5.5 0 0 1 .7.02"/></symbol>
+<symbol id="i-checkmark_circle_20_filled" viewBox="0 0 20 20"><path d="M10 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16m3.36 5.65a.5.5 0 0 0-.64-.06l-.07.06L9 11.3 7.35 9.65l-.07-.06a.5.5 0 0 0-.7.7l.07.07 2 2 .07.06c.17.11.4.11.56 0l.07-.06 4-4 .07-.08a.5.5 0 0 0-.06-.63"/></symbol>
+<symbol id="i-chevron_right_12_regular" viewBox="0 0 12 12"><path d="M4.65 2.15a.5.5 0 0 0 0 .7L7.79 6 4.65 9.15a.5.5 0 1 0 .7.7l3.5-3.5a.5.5 0 0 0 0-.7l-3.5-3.5a.5.5 0 0 0-.7 0"/></symbol>
+<symbol id="i-database_20_filled" viewBox="0 0 20 20"><path d="M10 8c3.31 0 6-1.34 6-3s-2.69-3-6-3-6 1.34-6 3 2.69 3 6 3m4.69.02q.72-.36 1.31-.9V15c0 1.66-2.69 3-6 3s-6-1.34-6-3V7.12q.59.54 1.31.9C6.56 8.64 8.22 9 10 9s3.44-.36 4.69-.98"/></symbol>
+<symbol id="i-database_24_regular" viewBox="0 0 24 24"><path d="M4 6c0-.7.32-1.3.77-1.78a6 6 0 0 1 1.8-1.2A14 14 0 0 1 12 2c2.08 0 4 .38 5.43 1.02q1.1.48 1.8 1.2c.45.49.77 1.09.77 1.78v12c0 .7-.32 1.3-.77 1.78q-.7.72-1.8 1.2A14 14 0 0 1 12 22c-2.08 0-4-.38-5.43-1.02a6 6 0 0 1-1.8-1.2A2.6 2.6 0 0 1 4 18zm1.5 0c0 .2.09.46.37.75q.4.46 1.31.86c1.2.54 2.9.89 4.82.89s3.62-.35 4.82-.89q.9-.4 1.31-.86c.28-.3.37-.54.37-.75s-.09-.46-.37-.75q-.4-.46-1.31-.86c-1.2-.54-2.9-.89-4.82-.89s-3.62.35-4.82.89q-.9.4-1.31.86c-.28.3-.37.54-.37.75m13 2.4a7 7 0 0 1-1.07.58A14 14 0 0 1 12 10c-2.08 0-4-.38-5.43-1.02A7 7 0 0 1 5.5 8.4V18c0 .2.09.46.37.75q.4.46 1.31.86c1.2.54 2.9.89 4.82.89s3.62-.35 4.82-.89q.9-.4 1.31-.86c.28-.3.37-.54.37-.75z"/></symbol>
+<symbol id="i-delete_24_regular" viewBox="0 0 24 24"><path d="M10 5h4a2 2 0 1 0-4 0M8.5 5a3.5 3.5 0 1 1 7 0h5.75a.75.75 0 0 1 0 1.5h-1.32l-1.17 12.11A3.75 3.75 0 0 1 15.03 22H8.97a3.75 3.75 0 0 1-3.73-3.39L4.07 6.5H2.75a.75.75 0 0 1 0-1.5zm2 4.75a.75.75 0 0 0-1.5 0v7.5a.75.75 0 0 0 1.5 0zM14.25 9c.41 0 .75.34.75.75v7.5a.75.75 0 0 1-1.5 0v-7.5c0-.41.34-.75.75-.75m-7.52 9.47a2.25 2.25 0 0 0 2.24 2.03h6.06c1.15 0 2.12-.88 2.24-2.03L18.42 6.5H5.58z"/></symbol>
+<symbol id="i-dismiss_16_regular" viewBox="0 0 16 16"><path d="m2.59 2.72.06-.07a.5.5 0 0 1 .63-.06l.07.06L8 7.29l4.65-4.64a.5.5 0 0 1 .7.7L8.71 8l4.64 4.65c.18.17.2.44.06.63l-.06.07a.5.5 0 0 1-.63.06l-.07-.06L8 8.71l-4.65 4.64a.5.5 0 0 1-.7-.7L7.29 8 2.65 3.35a.5.5 0 0 1-.06-.63l.06-.07z"/></symbol>
+<symbol id="i-dismiss_20_regular" viewBox="0 0 20 20"><path d="m4.09 4.22.06-.07a.5.5 0 0 1 .63-.06l.07.06L10 9.29l5.15-5.14a.5.5 0 0 1 .63-.06l.07.06c.18.17.2.44.06.63l-.06.07L10.71 10l5.14 5.15c.18.17.2.44.06.63l-.06.07a.5.5 0 0 1-.63.06l-.07-.06L10 10.71l-5.15 5.14a.5.5 0 0 1-.63.06l-.07-.06a.5.5 0 0 1-.06-.63l.06-.07L9.29 10 4.15 4.85a.5.5 0 0 1-.06-.63l.06-.07z"/></symbol>
+<symbol id="i-document_text_20_regular" viewBox="0 0 20 20"><path d="M6.5 10a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1zM4 4c0-1.1.9-2 2-2h4.59q.62.01 1.06.44l3.91 3.91c.28.28.44.67.44 1.06V16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8h-3.5A1.5 1.5 0 0 1 10 6.5V3zm5.5 4h3.3L11 3.2v3.3c0 .28.22.5.5.5"/></symbol>
+<symbol id="i-folder_24_filled" viewBox="0 0 24 24"><path d="M2 8V6.25C2 4.45 3.46 3 5.25 3h2.88c.6 0 1.17.24 1.59.66l1.53 1.53-2.6 2.59a.8.8 0 0 1-.52.22zm0 1.5v8.25C2 19.55 3.46 21 5.25 21h13.5c1.8 0 3.25-1.46 3.25-3.25v-9c0-1.8-1.46-3.25-3.25-3.25h-5.69L9.72 8.84c-.42.42-1 .66-1.6.66z"/></symbol>
+<symbol id="i-folder_24_regular" viewBox="0 0 24 24"><path d="M3.5 6.25V8h4.63q.31 0 .53-.22l1.53-1.53-1.53-1.53a.8.8 0 0 0-.53-.22H5.25c-.97 0-1.75.78-1.75 1.75m-1.5 0C2 4.45 3.46 3 5.25 3h2.88c.6 0 1.17.24 1.59.66l1.84 1.84h7.19c1.8 0 3.25 1.46 3.25 3.25v9c0 1.8-1.46 3.25-3.25 3.25H5.25A3.25 3.25 0 0 1 2 17.75zM3.5 9.5v8.25c0 .97.78 1.75 1.75 1.75h13.5c.97 0 1.75-.78 1.75-1.75v-9c0-.97-.78-1.75-1.75-1.75h-7.19L9.72 8.84c-.42.42-1 .66-1.6.66z"/></symbol>
+<symbol id="i-gavel_20_regular" viewBox="0 0 20 20"><path d="M6.44 5.28a1.5 1.5 0 0 0 .23 2.31l1.76 1.18-5.85 5.86a1.98 1.98 0 1 0 2.8 2.8l5.85-5.86 1.18 1.76c.53.79 1.64.9 2.3.23l2.85-2.84a1.5 1.5 0 0 0-.19-2.28l-3.31-2.39-.12-.11-2.38-3.31a1.5 1.5 0 0 0-2.28-.19zm4.22 5.44-6 6a.98.98 0 0 1-1.37-1.39l5.99-5.99.74.5q.09.05.14.14zM7.22 6.76a.5.5 0 0 1-.07-.77l2.84-2.84a.5.5 0 0 1 .76.06l.56.79-3.29 3.3zm1.65 1.1 3.04-3.04 1.22 1.7q.15.2.34.35l1.7 1.22-3.03 3.04-1.15-1.71a2 2 0 0 0-.41-.41zM16 8.7l.79.56a.5.5 0 0 1 .06.76L14 12.85a.5.5 0 0 1-.77-.07l-.53-.8zm-4 7.81c0-.28.22-.5.5-.5h3a.5.5 0 1 1 0 1h2a.5.5 0 1 1 0 1h-7a.5.5 0 1 1 0-1h2a.5.5 0 0 1-.5-.5"/></symbol>
+<symbol id="i-grid_24_regular" viewBox="0 0 24 24"><path d="M8.75 13C9.99 13 11 14 11 15.25v3.5C11 19.99 10 21 8.75 21h-3.5C4.01 21 3 20 3 18.75v-3.5C3 14.01 4 13 5.25 13zm10 0c1.24 0 2.25 1 2.25 2.25v3.5c0 1.24-1 2.25-2.25 2.25h-3.5C14.01 21 13 20 13 18.75v-3.5c0-1.24 1-2.25 2.25-2.25zm-10 1.5h-3.5a.75.75 0 0 0-.75.75v3.5c0 .41.34.75.75.75h3.5c.41 0 .75-.34.75-.75v-3.5a.75.75 0 0 0-.75-.75m10 0h-3.5a.75.75 0 0 0-.75.75v3.5c0 .41.34.75.75.75h3.5c.41 0 .75-.34.75-.75v-3.5a.75.75 0 0 0-.75-.75M8.75 3C9.99 3 11 4 11 5.25v3.5C11 9.99 10 11 8.75 11h-3.5C4.01 11 3 10 3 8.75v-3.5C3 4.01 4 3 5.25 3zm10 0C19.99 3 21 4 21 5.25v3.5C21 9.99 20 11 18.75 11h-3.5C14.01 11 13 10 13 8.75v-3.5C13 4.01 14 3 15.25 3zm-10 1.5h-3.5a.75.75 0 0 0-.75.75v3.5c0 .41.34.75.75.75h3.5c.41 0 .75-.34.75-.75v-3.5a.75.75 0 0 0-.75-.75m10 0h-3.5a.75.75 0 0 0-.75.75v3.5c0 .41.34.75.75.75h3.5c.41 0 .75-.34.75-.75v-3.5a.75.75 0 0 0-.75-.75"/></symbol>
+<symbol id="i-info_20_filled" viewBox="0 0 20 20"><path d="M18 10a8 8 0 1 0-16 0 8 8 0 0 0 16 0M9.5 8.91a.5.5 0 0 1 1 0v4.69a.5.5 0 0 1-1 0V8.9m-.25-2.16a.75.75 0 1 1 1.5 0 .75.75 0 0 1-1.5 0"/></symbol>
+<symbol id="i-link_20_regular" viewBox="0 0 20 20"><path d="M8 6a.5.5 0 0 1 .09 1H6a3 3 0 0 0-.2 6H8a.5.5 0 0 1 .09 1H6a4 4 0 0 1-.22-8H8m6 0a4 4 0 0 1 .22 8H12a.5.5 0 0 1-.09-1H14a3 3 0 0 0 .2-6H12a.5.5 0 0 1-.09-1H14M6 9.5h8a.5.5 0 0 1 .09 1H6a.5.5 0 0 1-.09-1zh8z"/></symbol>
+<symbol id="i-lock_closed_16_filled" viewBox="0 0 16 16"><path d="M8 1a3 3 0 0 1 3 3v2a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8c0-1.1.9-2 2-2V4a3 3 0 0 1 3-3m0 8.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2M8 2a2 2 0 0 0-2 2v2h4V4a2 2 0 0 0-2-2"/></symbol>
+<symbol id="i-lock_closed_16_regular" viewBox="0 0 16 16"><path d="M8 1a3 3 0 0 1 3 3v2a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8c0-1.1.9-2 2-2V4a3 3 0 0 1 3-3M5 7a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm3 2.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2M8 2a2 2 0 0 0-2 2v2h4V4a2 2 0 0 0-2-2"/></symbol>
+<symbol id="i-lock_closed_20_regular" viewBox="0 0 20 20"><path d="M10 1a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v6a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 4 15.5v-6c0-1.2.86-2.22 2-2.45V5a4 4 0 0 1 4-4M6.5 8C5.67 8 5 8.67 5 9.5v6c0 .83.67 1.5 1.5 1.5h7c.83 0 1.5-.67 1.5-1.5v-6c0-.83-.67-1.5-1.5-1.5zm3.5 3.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2M10 2a3 3 0 0 0-3 3v2h6V5a3 3 0 0 0-3-3"/></symbol>
+<symbol id="i-more_horizontal_20_regular" viewBox="0 0 20 20"><path d="M6.25 10a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0m5 0a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0M15 11.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5"/></symbol>
+<symbol id="i-people_community_20_regular" viewBox="0 0 20 20"><path d="M10 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4M7 5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m-1.95 5q-.05.24-.05.5v.54l-2.63.71a.5.5 0 0 0-.35.61l.64 2.42a3 3 0 0 0 3.32 2.2q.35.45.79.83l-.17.05a4 4 0 0 1-4.9-2.82l-.65-2.42a1.5 1.5 0 0 1 1.06-1.84zM15 11.04v-.54q0-.26-.05-.5l2.94.78a1.5 1.5 0 0 1 1.06 1.84l-.64 2.42a4 4 0 0 1-5.07 2.77q.44-.37.78-.84a3 3 0 0 0 3.32-2.2l.65-2.4a.5.5 0 0 0-.36-.62zm0-4.54a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0M16.5 4a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5m-13 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M1 6.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0M7.5 9C6.67 9 6 9.67 6 10.5V14a4 4 0 0 0 8 0v-3.5c0-.83-.67-1.5-1.5-1.5zM7 10.5c0-.28.22-.5.5-.5h5c.28 0 .5.22.5.5V14a3 3 0 1 1-6 0z"/></symbol>
+<symbol id="i-person_20_regular" viewBox="0 0 20 20"><path d="M10 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8M7 6a3 3 0 1 1 6 0 3 3 0 0 1-6 0m-2 5a2 2 0 0 0-2 2c0 1.7.83 2.97 2.13 3.8A9 9 0 0 0 10 18c1.85 0 3.58-.39 4.87-1.2A4.4 4.4 0 0 0 17 13a2 2 0 0 0-2-2zm-1 2a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1c0 1.3-.62 2.28-1.67 2.95A8 8 0 0 1 10 17a8 8 0 0 1-4.33-1.05A3.4 3.4 0 0 1 4 13"/></symbol>
+<symbol id="i-question_circle_20_regular" viewBox="0 0 20 20"><path d="M10 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16m0 1a7 7 0 1 0 0 14 7 7 0 0 0 0-14m0 10.5a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5m0-8a2.5 2.5 0 0 1 1.65 4.38l-.15.12-.22.17-.09.07-.16.15c-.33.36-.53.85-.53 1.61a.5.5 0 0 1-1 0 3.2 3.2 0 0 1 1.16-2.62l.25-.19.12-.1A1.5 1.5 0 0 0 10 6.5c-.83 0-1.5.67-1.5 1.5a.5.5 0 0 1-1 0A2.5 2.5 0 0 1 10 5.5"/></symbol>
+<symbol id="i-re_order_dots_vertical_20_regular" viewBox="0 0 20 20"><path d="M7 5a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2m1 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m5-11a1 1 0 1 0 0-2 1 1 0 0 0 0 2m1 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-1 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/></symbol>
+<symbol id="i-scales_20_regular" viewBox="0 0 20 20"><path d="M3.5 3a.5.5 0 1 0 0 1h.75L2.08 9.22a1 1 0 0 0-.08.4 3 3 0 0 0 6 0 1 1 0 0 0-.08-.4L5.75 4H9.5v10H6a2 2 0 1 0 0 4h8a2 2 0 0 0 0-4h-3.5V4h3.75l-2.17 5.22a1 1 0 0 0-.08.4 3 3 0 0 0 6 0 1 1 0 0 0-.08-.4L15.75 4h.75a.5.5 0 0 0 0-1zM5 11.5A2 2 0 0 1 3.06 10h3.88A2 2 0 0 1 5 11.5m0-6.7L6.75 9h-3.5zM6 15h8a1 1 0 0 1 0 2H6a1 1 0 1 1 0-2m10.75-6h-3.5L15 4.8zm-3.69 1h3.88a2 2 0 0 1-3.88 0"/></symbol>
+<symbol id="i-search_24_regular" viewBox="0 0 24 24"><path d="M16.1 17.16a8 8 0 1 1 1.06-1.06l4.62 4.62a.75.75 0 1 1-1.06 1.06zM17.5 11a6.5 6.5 0 1 0-13 0 6.5 6.5 0 0 0 13 0"/></symbol>
+<symbol id="i-speaker_2_20_regular" viewBox="0 0 20 20"><path d="M12 3a1 1 0 0 0-1.68-.73l-3.88 3.6A.5.5 0 0 1 6.1 6H3.5C2.67 6 2 6.67 2 7.5v5c0 .83.67 1.5 1.5 1.5h2.6a.5.5 0 0 1 .34.13l3.88 3.6a1 1 0 0 0 1.68-.74zM7.12 6.6 11 3v14l-3.88-3.6A1.5 1.5 0 0 0 6.1 13H3.5a.5.5 0 0 1-.5-.5v-5c0-.28.22-.5.5-.5h2.6c.38 0 .75-.14 1.02-.4m8.14-1.97a.5.5 0 0 1 .7.04 8 8 0 0 1 0 10.66.5.5 0 0 1-.74-.66 7 7 0 0 0 0-9.34.5.5 0 0 1 .04-.7m-1.18 8.3a.5.5 0 0 1-.18-.68 4.5 4.5 0 0 0 0-4.5.5.5 0 1 1 .86-.5 5.5 5.5 0 0 1 0 5.5.5.5 0 0 1-.68.18"/></symbol>
+<symbol id="i-square_16_regular" viewBox="0 0 16 16"><path d="M2 4.5A2.5 2.5 0 0 1 4.5 2h7A2.5 2.5 0 0 1 14 4.5v7a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 11.5zM4.5 3C3.67 3 3 3.67 3 4.5v7c0 .83.67 1.5 1.5 1.5h7c.83 0 1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5z"/></symbol>
+<symbol id="i-square_multiple_16_regular" viewBox="0 0 16 16"><path d="M5.08 4c.21-.58.77-1 1.42-1H10a3 3 0 0 1 3 3v3.5c0 .65-.42 1.2-1 1.41V6a2 2 0 0 0-2-2zM4.5 5h5c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5h-5A1.5 1.5 0 0 1 3 11.5v-5C3 5.67 3.67 5 4.5 5m0 1a.5.5 0 0 0-.5.5v5c0 .28.22.5.5.5h5a.5.5 0 0 0 .5-.5v-5a.5.5 0 0 0-.5-.5z"/></symbol>
+<symbol id="i-subtract_16_regular" viewBox="0 0 16 16"><path d="M3 8c0-.28.22-.5.5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8"/></symbol>
+<symbol id="i-text_bullet_list_square_20_regular" viewBox="0 0 20 20"><path d="M6.75 8a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5m.75 2.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0M6.75 14a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5M9 7.5c0-.28.22-.5.5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zM9 13.5c0-.28.22-.5.5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M5.75 3h8.5A2.75 2.75 0 0 1 17 5.75v8.5A2.75 2.75 0 0 1 14.25 17h-8.5A2.75 2.75 0 0 1 3 14.25v-8.5A2.75 2.75 0 0 1 5.75 3M4 5.75v8.5c0 .97.78 1.75 1.75 1.75h8.5c.97 0 1.75-.78 1.75-1.75v-8.5C16 4.78 15.22 4 14.25 4h-8.5C4.78 4 4 4.78 4 5.75"/></symbol>
+<symbol id="i-tray_item_add_20_regular" viewBox="0 0 20 20"><path d="M11 3a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1zm4 0h-3v2h3zm-1.5 4c.28 0 .5.22.5.5v5.8l1.15-1.15a.5.5 0 0 1 .7.7l-2 2a.5.5 0 0 1-.7 0l-2-2a.5.5 0 0 1 .7-.7L13 13.29V7.5c0-.28.22-.5.5-.5M4 12a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1zm4 0H5v2h3zm-5.5 1c.28 0 .5.22.5.5V15a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1.5a.5.5 0 0 1 1 0V15a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-1.5c0-.28.22-.5.5-.5"/></symbol>
+<symbol id="i-wifi_1_20_regular" viewBox="0 0 20 20"><path d="M16.83 7.38q.62.63 1.14 1.37a.5.5 0 0 1-.83.57 8.61 8.61 0 0 0-14.2 0 .5.5 0 0 1-.82-.58 9.61 9.61 0 0 1 14.71-1.36M14.6 9.36q.71.72 1.19 1.65a.5.5 0 0 1-.89.46q-.4-.8-1.01-1.4a5.45 5.45 0 0 0-8.72 1.38.5.5 0 1 1-.89-.45q.45-.9 1.2-1.64a6.45 6.45 0 0 1 9.12 0m-1.71 2.5q.53.53.85 1.25a.5.5 0 0 1-.92.4 3.03 3.03 0 0 0-5.56-.01.5.5 0 1 1-.92-.4q.3-.72.84-1.25a4.03 4.03 0 0 1 5.7 0m-1.93 1.93a1.3 1.3 0 1 1-1.83 1.83 1.3 1.3 0 0 1 1.83-1.83"/></symbol>
 <!--ICONS:END-->
       </defs>
     </svg>
 
-    <div data-hf-id="hf-lwht" id="root" data-composition-id="main" data-start="0" data-duration="47" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-lwht" id="root" data-composition-id="main" data-start="0" data-duration="130" data-width="1920" data-height="1080">
       <div data-hf-id="hf-2xc0" id="bg">
         <div data-hf-id="hf-re09" class="bloom" id="bl-blue" data-layout-allow-overflow=""></div><div data-hf-id="hf-vmup" class="bloom" id="bl-cream" data-layout-allow-overflow=""></div>
         <div data-hf-id="hf-op2a" class="bloom" id="bl-amber" data-layout-allow-overflow=""></div><div data-hf-id="hf-dl11" class="bloom" id="bl-mint" data-layout-allow-overflow=""></div>
       </div>
 
       <!-- Voiceover: Ifeoma Odumodu (ElevenLabs, eleven_multilingual_v2). The film is timed to these lines. -->
-      <audio data-hf-id="hf-0f8k" id="vo1" src="assets/vo/vo1-title.mp3" data-start="0.35" data-duration="3.9" data-track-index="2"></audio>
-      <audio data-hf-id="hf-4gxe" id="vo2" src="assets/vo/vo2-desktop.mp3" data-start="4.3" data-duration="3.0" data-track-index="2"></audio>
-      <audio data-hf-id="hf-6fag" id="vo3" src="assets/vo/vo3-queue.mp3" data-start="7.7" data-duration="6.45" data-track-index="2"></audio>
-      <audio data-hf-id="hf-qabf" id="vo4" src="assets/vo/vo4-score.mp3" data-start="14.4" data-duration="4.55" data-track-index="2"></audio>
-      <audio data-hf-id="hf-5ht8" id="vo5" src="assets/vo/vo5-tier.mp3" data-start="19.2" data-duration="6.64" data-track-index="2"></audio>
-      <audio data-hf-id="hf-g87e" id="vo6" src="assets/vo/vo6-commit.mp3" data-start="26.1" data-duration="4.91" data-track-index="2"></audio>
-      <audio data-hf-id="hf-6cy8" id="vo7" src="assets/vo/vo7-casefile.mp3" data-start="31.5" data-duration="3.06" data-track-index="2"></audio>
-      <audio data-hf-id="hf-zmwp" id="vo8" src="assets/vo/vo8-minimise.mp3" data-start="35.0" data-duration="5.85" data-track-index="2"></audio>
-      <audio data-hf-id="hf-jsh1" id="vo9" src="assets/vo/vo9-begin.mp3" data-start="41.9" data-duration="2.35" data-track-index="2"></audio>
+      <audio id="v01" src="assets/vo2/v01-title.mp3" data-start="0.4" data-duration="9.46" data-track-index="2"></audio>
+      <audio id="v02" src="assets/vo2/v02-situation.mp3" data-start="10.0" data-duration="17.79" data-track-index="2"></audio>
+      <audio id="v03" src="assets/vo2/v03-stakes.mp3" data-start="28.3" data-duration="13.27" data-track-index="2"></audio>
+      <audio id="v04" src="assets/vo2/v04-why.mp3" data-start="41.9" data-duration="15.0" data-track-index="2"></audio>
+      <audio id="v05" src="assets/vo2/v05-desktop.mp3" data-start="57.6" data-duration="5.51" data-track-index="2"></audio>
+      <audio id="v06" src="assets/vo2/v06-queue.mp3" data-start="63.6" data-duration="6.69" data-track-index="2"></audio>
+      <audio id="v07" src="assets/vo2/v07-record.mp3" data-start="70.9" data-duration="5.85" data-track-index="2"></audio>
+      <audio id="v08" src="assets/vo2/v08-judge.mp3" data-start="77.3" data-duration="14.76" data-track-index="2"></audio>
+      <audio id="v09" src="assets/vo2/v09-commit.mp3" data-start="93.3" data-duration="6.82" data-track-index="2"></audio>
+      <audio id="v10" src="assets/vo2/v10-casefile.mp3" data-start="100.6" data-duration="10.9" data-track-index="2"></audio>
+      <audio id="v11" src="assets/vo2/v11-minimise.mp3" data-start="112.2" data-duration="5.62" data-track-index="2"></audio>
+      <audio id="v12" src="assets/vo2/v12-begin.mp3" data-start="119.1" data-duration="7.18" data-track-index="2"></audio>
 
-      <div data-hf-id="hf-uu18" id="film" class="clip" data-start="0" data-duration="47" data-track-index="1">
+      <div data-hf-id="hf-uu18" id="film" class="clip" data-start="0" data-duration="130" data-track-index="1">
         <div data-hf-id="hf-t44u" id="drift">
 
           <!-- ===== 01 Title ===== -->
@@ -244,6 +261,38 @@
             <div data-hf-id="hf-q5vv" class="abs" id="t-eyebrow" style="left:0;right:0;top:500px;text-align:center;font-size:30px;font-weight:800;letter-spacing:0.12em;color:#9A6200">COMPLIANCE SANDBOX</div>
             <div data-hf-id="hf-dais" class="abs disp" id="t-lock" style="left:0;right:0;top:452px;display:flex;justify-content:center;align-items:center;gap:26px;font-size:150px;color:var(--ink)">
               <span data-hf-id="hf-5poz" class="w" id="t-a">Behind the</span><span data-hf-id="hf-j9gg" class="w order" id="t-ord">Order</span>
+            </div>
+            <div class="abs" id="role" style="left:0;right:0;top:660px;display:grid;justify-items:center;gap:10px;text-align:center">
+              <div style="font-size:24px;font-weight:800;letter-spacing:0.12em;color:#9A6200">YOUR ROLE</div>
+              <div style="font-size:48px;font-weight:700;color:var(--ink);letter-spacing:-0.01em">Public health law and ethics analyst</div>
+              <div style="font-size:32px;font-weight:500;color:var(--mid)">County health department</div>
+            </div>
+          </div>
+
+          <!-- ===== Story: the flag, the stakes, why it matters ===== -->
+          <div class="abs" id="story" style="inset:0">
+            <div class="abs card-s" id="toast" style="left:460px;top:290px;width:1000px">
+              <div style="display:flex;align-items:center;gap:14px;font-size:27px;font-weight:600;color:var(--mid)"><span class="tile-s"><svg class="ic" style="width:22px;height:22px"><use href="#i-database_24_regular"/></svg></span>ComplianceWatch<span style="margin-left:auto;font-weight:500">Risk prediction</span></div>
+              <div style="margin-top:16px;font-size:42px;line-height:1.2;font-weight:700;color:var(--ink)">Predicts who may stop their treatment</div>
+            </div>
+            <div class="abs card-s" id="hear" style="left:460px;top:290px;width:1000px;display:flex;align-items:center;gap:20px">
+              <span class="tile-s" style="background:#FFF4CE;color:#9D5D00"><svg class="ic" style="width:26px;height:26px"><use href="#i-calendar_ltr_20_regular"/></svg></span>
+              <div><div style="font-size:27px;font-weight:600;color:var(--mid)">Compliance hearing</div><div style="font-size:46px;font-weight:700;color:var(--ink)">In 5 days</div></div>
+            </div>
+            <div class="abs card-s" id="pcard" style="left:460px;top:520px;width:1000px;display:flex;align-items:center;gap:24px">
+              <div id="pc-left" style="display:flex;align-items:center;gap:24px;flex:1">
+                <span style="flex:none;width:112px;height:112px;border-radius:50%;background:#E8EEF6;color:#3A4A5E;display:grid;place-items:center;font-size:42px;font-weight:700">TB</span>
+                <div><div style="font-size:56px;font-weight:700;color:var(--ink);letter-spacing:-0.01em">Tunde Balogun</div><div style="font-size:32px;line-height:1.3;color:var(--mid)">Tuberculosis treatment · isolation order</div></div>
+              </div>
+              <div id="risk" style="flex:none;display:grid;justify-items:center;padding:12px 26px;border-radius:18px;background:#FFF4CE;color:#7A4700">
+                <span style="font-family:'Afacad',sans-serif;font-size:80px;font-weight:650;line-height:1">88%</span><span style="font-size:24px;font-weight:700;letter-spacing:0.06em">HIGH RISK</span>
+              </div>
+            </div>
+            <div class="abs" id="paths" style="left:0;right:0;top:760px;display:flex;justify-content:center;gap:20px">
+              <span class="pill-s" id="p1">More support</span><span class="pill-s" id="p2">Close the flag</span><span class="pill-s" id="p3"><svg class="ic" style="width:26px;height:26px"><use href="#i-lock_closed_20_regular"/></svg>Court petition to detain</span>
+            </div>
+            <div class="abs" id="qs" style="left:0;right:0;top:790px;display:flex;justify-content:center;gap:26px">
+              <span class="q-s" id="q1">Visits and shifts <b>?</b></span><span class="q-s" id="q2">Language and interpreter <b>?</b></span><span class="q-s" id="q3">Order history <b>?</b></span>
             </div>
           </div>
 
@@ -393,12 +442,21 @@
           </div>
 
           <!-- headlines (above the camera) -->
+          <div class="headline" id="hs2" style="left:0;right:0;top:150px" data-layout-allow-overlap="" data-layout-allow-occlusion=""><span class="w">A</span><span class="w">patient</span><span class="w">has</span><span class="w">been</span><span class="w em">flagged</span></div>
+          <div class="headline" id="hs3" style="left:0;right:0;top:150px" data-layout-allow-overlap="" data-layout-allow-occlusion=""><span class="w">A</span><span class="w">decision</span><span class="w">about</span><span class="w em">freedom</span></div>
+          <div class="headline" id="hs4" style="left:0;right:0;top:150px" data-layout-allow-overlap="" data-layout-allow-occlusion=""><span class="w">A</span><span class="w">score</span><span class="w">is</span><span class="w em">not</span><span class="w em">proof</span></div>
+          <div class="abs" id="tasks" style="left:0;right:0;top:330px;display:flex;justify-content:center;gap:18px" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+            <span class="chip-s" id="k1"><svg class="ic"><use href="#i-text_bullet_list_square_20_regular"/></svg>Sort evidence</span>
+            <span class="chip-s" id="k2"><svg class="ic"><use href="#i-link_20_regular"/></svg>Link records</span>
+            <span class="chip-s" id="k3"><svg class="ic"><use href="#i-scales_20_regular"/></svg>Weigh trade-offs</span>
+            <span class="chip-s" id="k4"><svg class="ic"><use href="#i-gavel_20_regular"/></svg>Recommend</span>
+          </div>
           <div data-hf-id="hf-2cub" id="scrim" data-layout-allow-occlusion="" data-layout-allow-overlap=""></div>
           <div data-hf-id="hf-m66o" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="headline" id="h3" style="left:1030px;right:0;top:470px;font-size:80px"><span data-hf-id="hf-a278" class="w">Start</span><span data-hf-id="hf-vjqo" class="w">with</span><span data-hf-id="hf-9o0j" class="w">the</span><span data-hf-id="hf-khu5" class="w em">queue</span></div>
-          <div data-hf-id="hf-ha1v" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="headline" id="h4" style="left:0;right:0;top:96px"><span data-hf-id="hf-69yk" class="w">Read</span><span data-hf-id="hf-5g8v" class="w">beyond</span><span data-hf-id="hf-cto3" class="w">the</span><span data-hf-id="hf-r6rk" class="w em">score</span></div>
-          <div data-hf-id="hf-8l4a" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="headline" id="h5" style="left:0;right:0;top:96px"><span data-hf-id="hf-g4ix" class="w">Assign</span><span data-hf-id="hf-b7a3" class="w">a</span><span data-hf-id="hf-0bgi" class="w em">review</span><span data-hf-id="hf-eeuq" class="w em">tier</span></div>
-          <div data-hf-id="hf-dit5" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="headline" id="h6" style="left:0;right:0;top:96px"><span data-hf-id="hf-zjhk" class="w">Drafts</span><span data-hf-id="hf-qli9" class="w">save.</span><span data-hf-id="hf-1nr1" class="w k">Confirm</span><span data-hf-id="hf-ptba" class="w em">commits.</span></div>
-          <div data-hf-id="hf-1cph" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="headline" id="h7" style="left:0;right:1060px;top:470px"><span data-hf-id="hf-civn" class="w">Your</span><span data-hf-id="hf-bdom" class="w em">case</span><span data-hf-id="hf-rlz0" class="w em">file</span></div>
+          <div data-hf-id="hf-ha1v" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="headline" id="h4" style="left:0;right:0;top:96px"><span class="w">Read</span><span class="w">the</span><span class="w em">whole</span><span class="w em">record</span></div>
+          <div data-hf-id="hf-8l4a" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="headline" id="h5" style="left:0;right:0;top:96px"><span class="w">Make</span><span class="w">a</span><span class="w em">judgement</span></div>
+          <div data-hf-id="hf-dit5" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="headline" id="h6" style="left:0;right:0;top:96px"><span class="w">Drafts</span><span class="w">save.</span><span class="w k">Confirm</span><span class="w em">locks.</span></div>
+          <div data-hf-id="hf-1cph" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="headline" id="h7" style="left:0;right:1040px;top:430px;flex-wrap:wrap;font-size:62px;padding:0 40px"><span class="w">Record</span><span class="w em">why,</span><span class="w">not</span><span class="w">just</span><span class="w">what</span></div>
           <div data-hf-id="hf-ihlo" data-layout-allow-overlap="" data-layout-allow-occlusion="" class="headline" id="h8" style="left:0;right:0;top:150px"><span data-hf-id="hf-hryt" class="w">Minimise</span><span data-hf-id="hf-rwml" class="w em">anytime</span></div>
 
           <!-- ===== 09 End card ===== -->
@@ -407,9 +465,7 @@
               <img data-hf-id="hf-6suq" src="assets/img/miva-mark.png" alt="" style="width:74px;height:auto;display:block">
               <span data-hf-id="hf-fj6w" class="disp" style="font-size:96px;color:var(--ink)">Behind the</span><span data-hf-id="hf-ufqc" class="disp order" style="font-size:96px;padding:0 20px 8px;border-radius:16px">Order</span>
             </div>
-            <div data-hf-id="hf-bg0h" class="abs" id="e-plan" style="left:0;right:0;top:700px;display:flex;justify-content:center;gap:0 0.4em;font-size:32px;font-weight:600;color:var(--mid)">
-              <span data-hf-id="hf-ouds" class="w">Case review</span><span data-hf-id="hf-jh5p" class="w">·</span><span data-hf-id="hf-hq35" class="w">then county review</span>
-            </div>
+            <div data-hf-id="hf-bg0h" class="abs" id="e-plan" style="left:0;right:0;top:700px;display:flex;justify-content:center;gap:0 0.4em;font-size:32px;font-weight:600;color:var(--mid)"><span class="w">Read</span><span class="w">·</span><span class="w">Judge</span><span class="w">·</span><span class="w">Record why</span></div>
           </div>
           <div data-hf-id="hf-53f3" id="hb"><svg data-hf-id="hf-8p5n" id="hbG"><use data-hf-id="hf-e8zp" href="#i-database_24_regular" /></svg><div data-hf-id="hf-ev7h" id="hbL">Let's begin<svg data-hf-id="hf-f70a" class="ic"><use data-hf-id="hf-i4fq" href="#i-arrow_right_20_regular" /></svg></div></div>
 
@@ -424,8 +480,14 @@
 
     <script>
       (function () {
-        const D = 47;
+        const D = 130;
         const tl = gsap.timeline({ paused: true });
+        // [authoredStart, authoredEnd, filmStart, filmEnd]. The gaps (9.55–57.2, 78.05–87.0) hold the new story beats.
+        const SEG = [[0, 2.8, 0, 2.8], [2.8, 3.05, 9.3, 9.55], [3.05, 7.45, 57.2, 63.2], [7.45, 13.3, 63.2, 70.6], [13.3, 18.8, 70.6, 76.9],
+          [18.8, 19.95, 76.9, 78.05], [19.95, 25.8, 87.0, 92.85], [25.8, 30.6, 92.85, 100.3], [30.6, 34.6, 100.3, 111.8], [34.6, 41.2, 111.8, 118.6], [41.2, 47, 118.6, 130]];
+        // A time on a seam belongs to the segment that starts there (a beat starting at 3.05 starts at 57.2, not 9.55).
+        const T = (t) => { for (let i = 0; i < SEG.length; i++) { const [a0, a1, b0, b1] = SEG[i]; if (t < a1 - 1e-9 || i === SEG.length - 1) return b0 + (Math.max(t, a0) - a0) * (b1 - b0) / (a1 - a0); } return t; };
+        const tlR = { fromTo: (a, b, c, at) => tl.fromTo(a, b, c, T(at)) };
         gsap.registerPlugin(CustomEase);
         const DEC = CustomEase.create("emphDecel", "0.05,0.7,0.1,1");
         const ACC = CustomEase.create("emphAccel", "0.3,0,0.8,0.15");
@@ -457,11 +519,23 @@
           const from = {};
           for (const p in to) from[p] = p in cur ? cur[p] : DEF[p];
           S.set(k, Object.assign({}, cur, to));
+          tl.fromTo(t, toGsap(from), Object.assign(toGsap(to), { duration: dur, ease: ease || DEC, immediateRender: false }, extra || {}), T(at));
+        }
+        // goA / wordsInA / wordsOutA take film time directly (used by the story beats and the task chips).
+        function goA(t, to, at, dur, ease, extra) {
+          if (Array.isArray(t)) return t.forEach((x) => goA(x, to, at, dur, ease, extra));
+          const k = key(t); const cur = S.get(k) || {}; const from = {};
+          for (const p in to) from[p] = p in cur ? cur[p] : DEF[p];
+          S.set(k, Object.assign({}, cur, to));
           tl.fromTo(t, toGsap(from), Object.assign(toGsap(to), { duration: dur, ease: ease || DEC, immediateRender: false }, extra || {}), at);
         }
         const wordsIn = (sel, at, stagger = 0.12) =>
+          tl.fromTo(`${sel} .w`, { opacity: 0, y: 22, filter: "blur(20px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.42, ease: DEC, stagger, immediateRender: false }, T(at));
+        const wordsInA = (sel, at, stagger = 0.12) =>
           tl.fromTo(`${sel} .w`, { opacity: 0, y: 22, filter: "blur(20px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.42, ease: DEC, stagger, immediateRender: false }, at);
         const wordsOut = (sel, at) =>
+          tl.fromTo(`${sel} .w`, { opacity: 1, y: 0, filter: "blur(0px)" }, { opacity: 0, y: -16, filter: "blur(18px)", duration: 0.24, ease: ACC, stagger: 0.03, immediateRender: false }, T(at));
+        const wordsOutA = (sel, at) =>
           tl.fromTo(`${sel} .w`, { opacity: 1, y: 0, filter: "blur(0px)" }, { opacity: 0, y: -16, filter: "blur(18px)", duration: 0.24, ease: ACC, stagger: 0.03, immediateRender: false }, at);
 
         function build() {
@@ -476,6 +550,7 @@
           const rowTR = R("#rowT"), tier2R = R("#tier2"), tier3R = R("#tier3"), cardMoreR = R("#cardMore"), fiER = R("#fiE");
           const fsR = R("#fsW"), btnR = R("#btnW"), dlgOkR = R("#dlgOk"), btnCFR = R("#btnCF"), capMinR = R("#capMin");
           const tileR = R("#tbApp"), diTileR = R("#diTile"), rpR = R("#rp");
+          const riskR = R("#risk"), qsR = [R("#q1"), R("#q2"), R("#q3")];
 
           const cardW = 236 * EP, cardH = 36 * EP;
           const card0 = { x: lpR.x + lpR.w - cardW * 0.55, y: tier3R.y + 4 };      // canvas, top-left
@@ -521,6 +596,8 @@
           init(["#s9", "#e-title", "#hb", "#hbL", "#cursor", ".ripple"], { opacity: 0 });
           init(".ripple", { scale: 0 });
           gsap.set(["#t-eyebrow", "#t-a", "#t-ord", ".headline .w", "#e-plan .w"], { opacity: 0 });
+          init(["#role", "#toast", "#hear", "#pcard", "#p1", "#p2", "#p3", "#q1", "#q2", "#q3", "#k1", "#k2", "#k3", "#k4"], { opacity: 0 });
+          init(["#story", "#pc-left", "#tasks"], { opacity: 1, blur: 0 });
 
           // ---------- Ambient: blooms drift, the whole film breathes in slowly ----------
           go("#bl-blue", { x: 70, y: 50 }, 0, D, "sine.inOut");
@@ -537,12 +614,12 @@
             const from = opts.from || { x: 1960, y: 1140 };
             go("#cursor", { opacity: 1, x: from.x, y: from.y, scale: 1 }, arrive - 0.01, 0.01, "none");
             go("#cursor", { x: p.x - tipX }, arrive, press - arrive - 0.1, STD);
-            tl.fromTo("#cursor", { y: from.y }, { y: p.y - tipY, duration: press - arrive - 0.1, ease: "power3.out", immediateRender: false }, arrive);
+            tlR.fromTo("#cursor", { y: from.y }, { y: p.y - tipY, duration: press - arrive - 0.1, ease: "power3.out", immediateRender: false }, arrive);
             S.get("#cursor").y = p.y - tipY;
-            tl.fromTo("#cursor", { scale: 1 }, { scale: 0.92, duration: 0.12, ease: "power2.in", yoyo: true, repeat: 1, immediateRender: false }, press);
+            tlR.fromTo("#cursor", { scale: 1 }, { scale: 0.92, duration: 0.12, ease: "power2.in", yoyo: true, repeat: 1, immediateRender: false }, press);
             const r = "#rp" + ++rp;
             gsap.set(r, { left: p.x, top: p.y });
-            tl.fromTo(r, { opacity: 1, scale: 0 }, { opacity: 0, scale: 3, duration: 0.55, ease: "power2.out", immediateRender: false }, press + 0.02);
+            tlR.fromTo(r, { opacity: 1, scale: 0 }, { opacity: 0, scale: 3, duration: 0.55, ease: "power2.out", immediateRender: false }, press + 0.02);
           }
           function leave(at, dx = 170, dy = 230) {
             const c = S.get("#cursor");
@@ -551,14 +628,55 @@
           function moveTo(p, at, dur, ease) { go("#cursor", { x: p.x - tipX, y: p.y - tipY }, at, dur, ease || STD); }
 
           // ===== 01 Title (0–3.3) =====
-          tl.fromTo("#t-eyebrow", { opacity: 0, y: 20, scale: 1.05, filter: "blur(20px)" }, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.35, ease: DEC, immediateRender: false }, 0.05);
-          tl.fromTo("#t-eyebrow", { opacity: 1, y: 0, filter: "blur(0px)" }, { opacity: 0, y: -14, filter: "blur(16px)", duration: 0.2, ease: ACC, immediateRender: false }, 0.62);
-          tl.fromTo("#t-a", { opacity: 0, x: 110, filter: "blur(20px)" }, { opacity: 1, x: 70, filter: "blur(0px)", duration: 0.42, ease: DEC, immediateRender: false }, 0.72);
-          tl.fromTo("#t-ord", { opacity: 0, scale: 0.6, rotation: 0, filter: "blur(15px)" }, { opacity: 1, scale: 1, rotation: -3, filter: "blur(0px)", duration: 0.42, ease: POP, immediateRender: false }, 1.12);
-          tl.fromTo("#t-a", { x: 70 }, { x: 0, duration: 0.42, ease: STD, immediateRender: false }, 1.15);
+          tlR.fromTo("#t-eyebrow", { opacity: 0, y: 20, scale: 1.05, filter: "blur(20px)" }, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.35, ease: DEC, immediateRender: false }, 0.05);
+          tlR.fromTo("#t-eyebrow", { opacity: 1, y: 0, filter: "blur(0px)" }, { opacity: 0, y: -14, filter: "blur(16px)", duration: 0.2, ease: ACC, immediateRender: false }, 0.62);
+          tlR.fromTo("#t-a", { opacity: 0, x: 110, filter: "blur(20px)" }, { opacity: 1, x: 70, filter: "blur(0px)", duration: 0.42, ease: DEC, immediateRender: false }, 0.72);
+          tlR.fromTo("#t-ord", { opacity: 0, scale: 0.6, rotation: 0, filter: "blur(15px)" }, { opacity: 1, scale: 1, rotation: -3, filter: "blur(0px)", duration: 0.42, ease: POP, immediateRender: false }, 1.12);
+          tlR.fromTo("#t-a", { x: 70 }, { x: 0, duration: 0.42, ease: STD, immediateRender: false }, 1.15);
           init("#t-lock", { scale: 1, opacity: 1, blur: 0 });
           go("#t-lock", { scale: 1.03 }, 1.5, 1.3, "sine.out");
           go("#t-lock", { scale: 1.15, opacity: 0, blur: 25 }, 2.85, 0.4, ACC);
+          // role, under the title (VO: "In this simulation, you are a public health law and ethics analyst…")
+          init("#role", { y: 24, blur: 16 });
+          goA("#role", { opacity: 1, y: 0, blur: 0 }, 2.5, 0.6);
+          goA("#role", { opacity: 0, y: -14, blur: 16 }, 9.1, 0.35, ACC);
+
+          // ===== Story 1 · the flag (10.0–28.0) =====
+          init("#toast", { x: 260, blur: 14 });
+          goA("#toast", { opacity: 1, x: 0, blur: 0 }, 10.3, 0.6);
+          init("#pcard", { y: 40, blur: 16 });
+          init("#pcard", { backgroundColor: "rgba(255,255,255,1)", borderColor: "rgba(9,49,79,0.1)", boxShadow: "0 30px 80px rgba(9,49,79,0.14)" });
+          wordsInA("#hs2", 18.2);
+          goA("#pcard", { opacity: 1, y: 0, blur: 0 }, 18.5, 0.6);
+          init("#risk", { scale: 0.6, opacity: 0 });
+          goA("#risk", { scale: 1, opacity: 1 }, 25.0, 0.45, POP);
+          goA("#pcard", { scale: 1.02 }, 25.4, 2.4, "sine.inOut");
+          wordsOutA("#hs2", 27.6);
+
+          // ===== Story 2 · the stakes (28.3–41.6) =====
+          goA("#toast", { opacity: 0, y: -30, blur: 14 }, 28.1, 0.35, ACC);
+          init("#hear", { y: 30, blur: 14 });
+          goA("#hear", { opacity: 1, y: 0, blur: 0 }, 28.5, 0.5);
+          init(["#p1", "#p2", "#p3"], { y: 30, blur: 12 });
+          goA("#p1", { opacity: 1, y: 0, blur: 0 }, 32.4, 0.45);
+          goA("#p2", { opacity: 1, y: 0, blur: 0 }, 33.4, 0.45);
+          goA("#p3", { opacity: 1, y: 0, blur: 0 }, 35.2, 0.45);
+          goA("#pcard", { scale: 1 }, 35.4, 0.6, STD);
+          wordsInA("#hs3", 38.2);
+          wordsOutA("#hs3", 41.4);
+
+          // ===== Story 3 · why it matters (41.9–57.2) =====
+          goA(["#hear", "#p1", "#p2", "#p3"], { opacity: 0, blur: 16 }, 41.7, 0.45, ACC);
+          goA("#pc-left", { opacity: 0, blur: 14 }, 41.8, 0.45, ACC);
+          goA("#pcard", { backgroundColor: "rgba(255,255,255,0)", borderColor: "rgba(9,49,79,0)", boxShadow: "0 30px 80px rgba(9,49,79,0)" }, 41.8, 0.45, STD);
+          const rc = C(riskR);
+          goA("#risk", { x: 960 - rc.x, y: 500 - rc.y, scale: 2.4 }, 42.1, 0.9, DEC);
+          wordsInA("#hs4", 43.0);
+          // "look behind the number": the unknowns come out from behind the score
+          qsR.forEach((q, i) => { init(`#q${i + 1}`, { x: 960 - C(q).x, y: 500 - C(q).y, scale: 0.4 }); goA(`#q${i + 1}`, { opacity: 1, x: 0, y: 0, scale: 1 }, 49.5 + i * 0.25, 0.7, DEC); });
+          goA("#risk", { y: 430 - rc.y, scale: 2.0 }, 49.4, 0.7, STD);
+          wordsOutA("#hs4", 56.0);
+          goA("#story", { opacity: 0, blur: 22, scale: 1.08 }, 56.3, 0.6, ACC);
 
           // ===== 02 Desktop → open the app (3.1–7.5) =====
           go("#desk", { opacity: 1 }, 3.05, 0.25, "power1.out");
@@ -574,7 +692,7 @@
           go("#win", { opacity: 1, scale: 1 }, 5.42, 0.36, DEC);
           go("#iconSel", { opacity: 0 }, 5.6, 0.2, "none");
           go("#ind", { opacity: 1 }, 5.45, 0.2, "none");
-          tl.fromTo("#rows .row", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.3, ease: DEC, stagger: 0.035, immediateRender: false }, 5.75);
+          tlR.fromTo("#rows .row", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.3, ease: DEC, stagger: 0.035, immediateRender: false }, 5.75);
 
           // ===== 03 Start with the queue (7.5–14.3) =====
           go("#cam", Q, 7.45, 0.85);
@@ -590,7 +708,7 @@
           go("#empty", { opacity: 0 }, 12.2, 0.2, "none");
           go("#rp", { blur: 0, opacity: 1 }, 12.6, 0.4, STD);
           go("#rec", { opacity: 1 }, 12.45, 0.3, "power1.out");
-          tl.fromTo(["#crumb", "#rhead", "#meta", "#tierBlock"], { y: 14 }, { y: 0, duration: 0.45, ease: DEC, stagger: 0.07, immediateRender: false }, 12.45);
+          tlR.fromTo(["#crumb", "#rhead", "#meta", "#tierBlock"], { y: 14 }, { y: 0, duration: 0.45, ease: DEC, stagger: 0.07, immediateRender: false }, 12.45);
 
           // ===== 04 Read beyond the score (13.3–19.1) =====
           go("#cam", RR, 13.3, 0.95);
@@ -602,7 +720,7 @@
           go("#mfScore", { scale: 1.3 }, 14.35, 0.5);
           wordsIn("#h4", 14.55);
           go("#mfScore", { scale: 1 }, 16.4, 0.5, STD);
-          tl.fromTo(".mo", { opacity: 0.3, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.45, ease: DEC, stagger: 0.09, immediateRender: false }, 16.5);
+          tlR.fromTo(".mo", { opacity: 0.3, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.45, ease: DEC, stagger: 0.09, immediateRender: false }, 16.5);
           S.set(".mo", Object.assign(S.get(".mo"), { opacity: 1, blur: 0 }));
           wordsOut("#h4", 18.6);
 
@@ -612,21 +730,26 @@
           go("#meta", { blur: 5, opacity: 0.35 }, 18.8, 0.45, STD);
           go(["#rhead", "#crumb"], { blur: 5, opacity: 0.35 }, 18.8, 0.45, STD);
           wordsIn("#h5", 19.3);
-          go("#tip", { opacity: 1, y: 0, scale: 1 }, 19.55, 0.4, POP);
+          // task chips, one per task the narration names (film time)
+          goA("#tierBlock", { blur: 7, opacity: 0.35 }, 78.1, 0.5, STD);
+          [80.5, 82.2, 83.7, 85.3].forEach((at, i) => { init(`#k${i + 1}`, { y: 30, blur: 14 }); goA(`#k${i + 1}`, { opacity: 1, y: 0, blur: 0 }, at, 0.45, POP); });
+          goA(["#k1", "#k2", "#k3", "#k4"], { opacity: 0, y: -18, blur: 14 }, 86.6, 0.3, ACC);
+          goA("#tierBlock", { blur: 0, opacity: 1 }, 86.8, 0.4, STD);
+          go("#tip", { opacity: 1, y: 0, scale: 1 }, 19.96, 0.4, POP);
           // the demo card is lifted out of the queue and dragged into Routine follow-up
           gsap.set("#card", { left: (card0.x - rpR.x) / EP, top: (card0.y - rpR.y) / EP });
           const dl = (p) => ({ x: (p.x - card0.x) / EP, y: (p.y - card0.y) / EP }); // canvas → card local offset
           const grabP = via({ x: card0.x + 40 * EP, y: card0.y + cardH / 2 }, TT);
-          go("#card", { opacity: 1, scale: 1.03 }, 19.7, 0.25, DEC);
-          click(grabP, 19.55, 19.95);
+          go("#card", { opacity: 1, scale: 1.03 }, 19.97, 0.25, DEC);
+          click(grabP, 19.98, 20.38);
           const d3 = dl(s3);
-          go("#card", { x: d3.x, y: d3.y }, 20.05, 0.8, GIO);
-          moveTo(via({ x: s3.x + 40 * EP, y: s3.y + cardH / 2 }, TT), 20.07, 0.8, GIO);
-          go("#hl3", { opacity: 1 }, 20.4, 0.25, "none");
-          go("#card", { scale: 1 }, 20.85, 0.2, STD);
-          go("#hl3", { opacity: 0 }, 21.1, 0.3, "none");
-          go("#cnt0", { opacity: 0 }, 20.9, 0.15, "none"); go("#cnt1", { opacity: 1 }, 20.9, 0.15, "none");
-          leave(21.05);
+          go("#card", { x: d3.x, y: d3.y }, 20.45, 0.8, GIO);
+          moveTo(via({ x: s3.x + 40 * EP, y: s3.y + cardH / 2 }, TT), 20.47, 0.8, GIO);
+          go("#hl3", { opacity: 1 }, 20.8, 0.25, "none");
+          go("#card", { scale: 1 }, 21.25, 0.2, STD);
+          go("#hl3", { opacity: 0 }, 21.5, 0.3, "none");
+          go("#cnt0", { opacity: 0 }, 21.3, 0.15, "none"); go("#cnt1", { opacity: 1 }, 21.3, 0.15, "none");
+          leave(21.45);
           go("#tip", { opacity: 0, y: 6 }, 23.1, 0.25, ACC);
           // change it: More → Move to → Enhanced monitoring this week
           const moreP = via({ x: s3.x + cardW - 19 * EP, y: s3.y + cardH / 2 }, TT);
@@ -634,7 +757,7 @@
           go("#fly", { opacity: 1, y: 0 }, 24.02, 0.22, DEC);
           moveTo(via(fiEc, TT), 24.2, 0.35);
           go("#fiHov", { opacity: 1 }, 24.48, 0.08, "none");
-          tl.fromTo("#cursor", { scale: 1 }, { scale: 0.92, duration: 0.12, ease: "power2.in", yoyo: true, repeat: 1, immediateRender: false }, 24.66);
+          tlR.fromTo("#cursor", { scale: 1 }, { scale: 0.92, duration: 0.12, ease: "power2.in", yoyo: true, repeat: 1, immediateRender: false }, 24.66);
           go("#fly", { opacity: 0, y: -4 }, 24.8, 0.15, ACC);
           const d2 = dl(s2);
           go("#card", { x: d2.x, y: d2.y }, 24.85, 0.5, STD);
@@ -674,11 +797,11 @@
           go(["#tierBlock", "#card", "#meta", "#rhead", "#crumb", "#lp", "#hdr"], { blur: 0, opacity: 1 }, 30.6, 0.45, STD);
           click(C(btnCFR), 31.0, 31.5);
           go("#drawer", { opacity: 1, x: 0 }, 31.62, 0.42, DEC);
-          tl.fromTo("#dwRows .dw-row", { opacity: 0, x: 18 }, { opacity: 1, x: 0, duration: 0.32, ease: DEC, stagger: 0.06, immediateRender: false }, 31.85);
+          tlR.fromTo("#dwRows .dw-row", { opacity: 0, x: 18 }, { opacity: 1, x: 0, duration: 0.32, ease: DEC, stagger: 0.06, immediateRender: false }, 31.85);
           leave(31.7, 120, 260);
           go("#cam", CF, 31.85, 0.75);
           go(["#lp", "#rp", "#foot"], { blur: 5, opacity: 0.5 }, 31.9, 0.45, STD);
-          wordsIn("#h7", 32.15);
+          wordsIn("#h7", 33.25);
           wordsOut("#h7", 34.4);
 
           // ===== 08 Minimise anytime (34.6–41.2) =====
@@ -687,7 +810,7 @@
           click(C(capMinR), 35.2, 35.85);
           const winOrigin = `${((C(tileR).x - winR.x) / winR.w) * 100}% ${((C(tileR).y - winR.y) / winR.h) * 100}%`;
           // minimise toward the taskbar icon (origin switched just before; the open animation used the centre)
-          tl.fromTo("#win", { transformOrigin: "50% 50%" }, { transformOrigin: winOrigin, duration: 0.01, ease: "none", immediateRender: false }, 35.0);
+          tlR.fromTo("#win", { transformOrigin: "50% 50%" }, { transformOrigin: winOrigin, duration: 0.01, ease: "none", immediateRender: false }, 35.0);
           go("#win", { scale: 0.12, opacity: 0 }, 35.92, 0.34, ACC);
           go("#ind", { width: 6, marginLeft: -3, backgroundColor: "#8A8A8A" }, 36.1, 0.2, STD);
           leave(36.0, 60, 300);
@@ -708,14 +831,14 @@
           go("#desk", { blur: 18, opacity: 0 }, 41.62, 0.5, STD);
           go("#hb", { x: 960 - 48, y: 616 - 48, width: 96, height: 96, borderRadius: 26 }, 41.75, 0.7, GIO);
           go("#hb", { x: 960 - 196, width: 392, borderRadius: 48 }, 42.45, 0.5, STD);
-          tl.fromTo("#hbG", { opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power1.in", immediateRender: false }, 42.45);
+          tlR.fromTo("#hbG", { opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power1.in", immediateRender: false }, 42.45);
           go("#hbL", { opacity: 1 }, 42.75, 0.25, "power1.out");
           go("#s9", { opacity: 1 }, 42.6, 0.01, "none");
           init("#e-title", { y: 26, blur: 20 });
           go("#e-title", { opacity: 1, y: 0, blur: 0 }, 42.7, 0.5);
           wordsIn("#e-plan", 43.15, 0.09);
           init("#s9", { scale: 1, transformOrigin: "50% 50%" });
-          go("#s9", { scale: 1.03 }, 43.3, 3.7, "sine.inOut");
+          go("#s9", { scale: 1.03 }, 43.3, 7, "sine.inOut");
 
           window.__timelines["main"] = tl;
         }

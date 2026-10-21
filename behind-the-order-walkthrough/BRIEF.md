@@ -2,16 +2,25 @@
 workflow: general-video
 flow: automation
 storyboard: no
-message: "Read each case beyond its score, and know that confirming puts a decision on record."
+message: "A risk score is not proof: look behind the number, decide carefully, and record why."
 destination: in-app walkthrough
 aspect: 1920x1080
 language: en-GB
 audience: "MIVA learners, Public Health Policy, Law & Ethics (Behind the Order simulation)"
-length: 45s
+length: 130s
 angle: product-ui-explainer
 ---
 
 ## Intent
+
+**Revision 2 (21 Oct 2026).** A test viewer didn't understand the first version. It explained the tools (click, drag, confirm) but not the situation or the reason for the task. Version 2 opens with three story beats before any interface appears:
+1. **The flag:** who you are, what ComplianceWatch is, and that Tunde Balogun has been flagged at 88%.
+2. **The stakes:** a hearing in five days. Your recommendation could mean more support or a petition to detain him, so it is a decision about freedom.
+3. **Why it matters:** a risk score is not proof. Your job is to look behind the number at the evidence.
+
+The tool tour that follows has rewritten narration that explains why each action matters: read the whole record, make a judgement, and record why, not just what. The narration is slower (speed 0.92) and plainer, and the in-app captions are on by default. Length grows from 47 s to about 2 min 10 s.
+
+### Original intent
 
 A voiced motion-graphics UI explainer for the Behind the Order simulation. It plays once after the MIVA logo opener and ends on a "Let's begin" end card. It teaches the tools only: the Windows 11 desktop, opening Compliance Sandbox, the case queue, reading the record, assigning a tier (drag or select), draft versus commit, the case file, and minimise/restore. **Act II and the Bridge stay hidden** (user decision); County review appears only as a locked tab.
 
@@ -34,5 +43,5 @@ The user's instruction for this run was: "build this do not stop till you are do
 
 ## Notes
 
-- Voiceover: ElevenLabs "Ifeoma Odumodu - Nigerian Narrator" (`reGkImJki7uJOve2F4A0`), eleven_multilingual_v2, stability 0.6, similarity 0.8, the same as the earlier MIVA films. Nine lines in `assets/vo/`. No music or SFX.
+- Voiceover: ElevenLabs "Ifeoma Odumodu - Nigerian Narrator" (`reGkImJki7uJOve2F4A0`), eleven_multilingual_v2, stability 0.6, similarity 0.8, the same as the earlier MIVA films. Twelve lines in `assets/vo2/` (version 2), speed 0.92. No music or SFX.
 - British English throughout.
